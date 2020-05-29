@@ -9,4 +9,4 @@ const schema = new Schema({
     typeReport: [{ type: Types.ObjectId, ref: 'directoryTypeReport' }],
 })
 
-//module.exports = model('reports', schema)
+module.exports = model('reports', schema)

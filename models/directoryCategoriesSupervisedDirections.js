@@ -4,4 +4,4 @@ const schema = new Schema({
     nameCategorySupervisedDirection: {type: String, required: true}
 })
 
-//module.exports = model('directoryCategoriesSupervisedDirections', schema)
+module.exports = model('directoryCategoriesSupervisedDirections', schema)

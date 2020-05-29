@@ -10,4 +10,4 @@ const schema = new Schema({
     possibilityEditingUser: {type: Boolean, required: true}
 })
 
-//module.exports = model('directoryAccessRights', schema)
+module.exports = model('directoryAccessRights', schema)

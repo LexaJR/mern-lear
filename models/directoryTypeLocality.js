@@ -4,4 +4,4 @@ const schema = new Schema({
     nameTypeLocality: {type: String, required: true}
 })
 
-//module.exports = model('directoryCategoryUrgentReport', schema)
+module.exports = model('directoryCategoryUrgentReport', schema)

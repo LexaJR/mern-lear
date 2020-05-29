@@ -4,4 +4,4 @@ const schema = new Schema({
     nameCountry: {type: String, required: true}
 })
 
-//module.exports = model('directoryCountry, schema)
+module.exports = model('directoryCountry', schema)

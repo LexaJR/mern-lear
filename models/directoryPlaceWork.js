@@ -12,4 +12,4 @@ const schema = new Schema({
     idFIAS: {type: String}
 })
 
-//module.exports = model('directoryPlaceWork', schema)
+module.exports = model('directoryPlaceWork', schema)

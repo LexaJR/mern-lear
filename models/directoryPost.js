@@ -4,4 +4,4 @@ const schema = new Schema({
     namePost: {type: String, required: true}
 })
 
-//module.exports = model('directoryPost, schema)
+module.exports = model('directoryPost', schema)

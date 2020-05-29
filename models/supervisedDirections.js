@@ -6,4 +6,4 @@ const schema = new Schema({
     responsibleWorker: [{ type: Types.ObjectId, ref: 'workers' }]
 })
 
-//module.exports = model('superDirections', schema)
+module.exports = model('superDirections', schema)
