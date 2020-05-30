@@ -1,7 +1,7 @@
 import React from 'react'
 
 export const LinksList = ({ workers }) => {
-  console.log(workers)
+  // console.log(workers)
   if (!workers.length) {
     return <p className="center">Сотрудников пока нет</p>
   }

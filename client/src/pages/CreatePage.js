@@ -4,12 +4,13 @@ import { useMessage } from '../hooks/message.hook'
 import 'materialize-css'
 
 export const CreatePage = () => {
-    const [meds, setMeds] = useState([])
+    const [placeWorks, setPlaceWorks] = useState([])
+    const [posts, setPosts] = useState([])
     const message = useMessage()
     const {loading, error, request, clearError} = useHttp()
 
     const [form, setForm] = useState({
-        name: '', surname: '', patronymic: '', phoneNumber: '', email: ''
+        name: '', surname: '', patronymic: '', phoneNumber: '', email: '', placeWork: '', namePost: ''
     })
 
     useEffect(() => {
@@ -17,58 +18,66 @@ export const CreatePage = () => {
     }, [])
 
     const changeHandler = event => {
+        // console.log(event.target.name, + " " + event.target.value)
         setForm({...form, [event.target.name]: event.target.value })
     }
 
     const createHandler = async () => {
         try {
-            console.log({...form})
+            // console.log({...form})
             const data = await request('/api/create/worker', 'POST', {...form})
+            // const data = await request('/api/create/post', 'POST', {...form})
             message(data.message)
         } catch (error) {}
     }
-    const searchMedHandler = async () => {
+    const searchPlaceWorksHandler = async () => {
         try {
             const data = await request('/api/search/med', 'POST', null)
-            console.log(data)
-            setMeds(data)
+            setPlaceWorks(data)
+        } catch (error) {console.log("Chto-to poshlo ne tak")}
+    }
+    const searchPostsHandler = async () => {
+        try {
+            const post = await request('/api/search/posts', 'POST', null)
+            setPosts(post)
         } catch (error) {console.log("Chto-to poshlo ne tak")}
     }
 
 
     return(
         <div className="card blue darken-2">
-                    <div className="card-content white-text">
+            <div className="card-content white-text">
                         <span className="card-title">Создание пользователя</span>
                         <div>
                             <div className="input-field">
                                 <input 
-                                placeholder="Введите email" 
+                                placeholder="Введите имя" 
                                 id="name" 
                                 type="text"
                                 name="name" 
                                 className="yellow-input"
                                 value={form.name}
                                 onChange={changeHandler}
-                                onClick={searchMedHandler}
+                                onClick={searchPlaceWorksHandler}
                                 />
                                 <label htmlFor="name">Имя</label>
                             </div>
                             <div className="input-field">
                                 <input 
-                                placeholder="Введите пароль" 
+                                placeholder="Введите фамилию" 
                                 id="surname" 
                                 type="text"
                                 name="surname" 
                                 className="yellow-input"
                                 value={form.surname}
                                 onChange={changeHandler}
+                                onClick={searchPostsHandler}
                                 />
                                 <label htmlFor="surname">Фамилия</label>
                             </div>
                             <div className="input-field">
                                 <input 
-                                placeholder="Введите пароль" 
+                                placeholder="Введите отчетсво" 
                                 id="patronymic" 
                                 type="text"
                                 name="patronymic" 
@@ -80,7 +89,7 @@ export const CreatePage = () => {
                             </div>
                             <div className="input-field">
                                 <input 
-                                placeholder="Введите пароль" 
+                                placeholder="Введите номер телефона" 
                                 id="phoneNumber" 
                                 type="text"
                                 name="phoneNumber" 
@@ -92,7 +101,7 @@ export const CreatePage = () => {
                             </div>
                             <div className="input-field">
                                 <input 
-                                placeholder="Введите пароль" 
+                                placeholder="Введите адресс электроной почты" 
                                 id="email" 
                                 type="text"
                                 name="email" 
@@ -102,14 +111,30 @@ export const CreatePage = () => {
                                 />
                                 <label htmlFor="email">Адресс электроной почты</label>
                             </div>
+                            <label htmlFor="placeWork">Место работы</label>
                             <select 
                             class="browser-default"
                             id="placeWork"
                             name="placeWork" 
                             onChange={changeHandler}>
-                            { meds.map((med) => {
+                            <option value="" disabled selected>Choose your option</option>
+                            { placeWorks.map((placeWork) => {
                                 return (
-                                <option value={med._id}>{med.namePlaceWork}</option>
+                                <option value={placeWork._id}>{placeWork.namePlaceWork}</option>
+                                )
+                            })
+                            }
+                            </select>
+                            <label htmlFor="namePost">Должность</label>
+                            <select 
+                            class="browser-default"
+                            id="namePost"
+                            name="namePost" 
+                            onChange={changeHandler}>
+                            <option value="" disabled selected>Choose your option</option>
+                            { posts.map((post) => {
+                                return (
+                                <option value={post._id}>{post.namePost}</option>
                                 )
                             })
                             }
@@ -123,9 +148,9 @@ export const CreatePage = () => {
                                     Создать
                                 </button>
                             </div>
-                    </div>
-                    </div>
-                    </div>
+                </div>
+            </div>
+        </div>
     )
 
 }

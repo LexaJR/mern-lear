@@ -9,7 +9,7 @@ export const LinksPage = () => {
 
   const fetchLinks = useCallback(async () => {
     try {
-      const fetched = await request('/api/search', 'GET', null)
+      const fetched = await request('/api/search', 'POST', null)
       setWorkers(fetched)
     } catch (e) {}
   }, [request])
