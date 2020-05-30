@@ -4,6 +4,7 @@ import { useMessage } from '../hooks/message.hook'
 import 'materialize-css'
 
 export const CreatePage = () => {
+    const [meds, setMeds] = useState([])
     const message = useMessage()
     const {loading, error, request, clearError} = useHttp()
 
@@ -21,9 +22,17 @@ export const CreatePage = () => {
 
     const createHandler = async () => {
         try {
+            console.log({...form})
             const data = await request('/api/create/worker', 'POST', {...form})
             message(data.message)
         } catch (error) {}
+    }
+    const searchMedHandler = async () => {
+        try {
+            const data = await request('/api/search/med', 'POST', null)
+            console.log(data)
+            setMeds(data)
+        } catch (error) {console.log("Chto-to poshlo ne tak")}
     }
 
 
@@ -41,6 +50,7 @@ export const CreatePage = () => {
                                 className="yellow-input"
                                 value={form.name}
                                 onChange={changeHandler}
+                                onClick={searchMedHandler}
                                 />
                                 <label htmlFor="name">Имя</label>
                             </div>
@@ -92,6 +102,18 @@ export const CreatePage = () => {
                                 />
                                 <label htmlFor="email">Адресс электроной почты</label>
                             </div>
+                            <select 
+                            class="browser-default"
+                            id="placeWork"
+                            name="placeWork" 
+                            onChange={changeHandler}>
+                            { meds.map((med) => {
+                                return (
+                                <option value={med._id}>{med.namePlaceWork}</option>
+                                )
+                            })
+                            }
+                            </select>
                             <div className="card-action">
                                 <button 
                                 className="btn waves-effect waves-ligh yellow darken-2 marginRight10"

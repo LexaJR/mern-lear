@@ -6,9 +6,9 @@ const schema = new Schema({
     regionPlaceWork: [{ type: Types.ObjectId, ref: 'directoryRegions' }],
     typeLocalityPlaceWork: [{ type: Types.ObjectId, ref: 'directoryTypeLocality' }],
     localityPlaceWork: [{ type: Types.ObjectId, ref: 'directoryLocality' }],
-    streetPlaceWork: {type: String, required: true},
-    houseNumberPlaceWork: {type: String, required: true},
-    phoneNumberResponsibleWorker: {type: String, required: true},
+    streetPlaceWork: {type: String},
+    houseNumberPlaceWork: {type: String},
+    phoneNumberResponsibleWorker: {type: String},
     idFIAS: {type: String}
 })
 
