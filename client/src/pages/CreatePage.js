@@ -28,7 +28,7 @@ export const CreatePage = () => {
             const data = await request('/api/create/worker', 'POST', {...form})
             // const data = await request('/api/create/post', 'POST', {...form})
             message(data.message)
-        } catch (error) {}
+        } catch (error) {message(error.message)}
     }
     const searchPlaceWorksHandler = async () => {
         try {

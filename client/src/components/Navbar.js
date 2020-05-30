@@ -15,7 +15,7 @@ export const Navbar = () => {
     return(
         <nav>
             <div className="nav-wrapper blue darken-1 padding2rem">
-                <span className="brand-logo">РМИАЦ</span>
+            <NavLink to="/default" className="brand-logo">РМИАЦ</NavLink>
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
                 <ul id="dropdown1" class="dropdown-content">
                     <li><a href="#!">one</a></li>

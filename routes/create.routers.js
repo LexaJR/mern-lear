@@ -10,10 +10,21 @@ const router = Router()
 
 router.post(
     '/worker',
+    [
+        check('email', 'Некоректный email').isEmail()
+    ],
     async (req, res) => {
     try {
+        const errors = validationResult(req)
+        if (!errors.isEmpty()) {
+            return res.status(400).json({
+                error: errors.array(),
+                message: 'Некоректный адрес электроной почты'
+            })
+        }
         const {name, surname, patronymic, phoneNumber, email, placeWork, namePost} = req.body
-        console.log(name, surname, patronymic, phoneNumber, email, placeWork, namePost)
+        // console.log(name, surname, patronymic, phoneNumber, email, placeWork, namePost)
+        
         const worker = new Worker({name, surname, patronymic, phoneNumber, email, placeWork, post: namePost})
         await worker.save()
         res.status(201).json({message: 'Сотрудник создан'})
