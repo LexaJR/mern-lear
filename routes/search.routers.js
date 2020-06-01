@@ -33,6 +33,14 @@ router.post('/med', async (req, res) => {
     res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
   }
 })
+router.post('/searchReports', async (req, res) => {
+  try {
+    const data = await reports.find()
+    res.json(data)
+  } catch (e) {
+    res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+  }
+})
 router.post('/posts', async (req, res) => {
   try {
     const post = await directoryPosts.find()
@@ -45,6 +53,16 @@ router.post('/reportsWorkers', async (req, res) => {
   try {
     const {workerid} = req.body
     const post = await reports.find({responsibleWorker: workerid})
+    res.json(post)
+  } catch (e) {
+    res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+  }
+})
+router.post('/workersReports', async (req, res) => {
+  try {
+    const {responsibleWorker} = req.body
+    console.log(responsibleWorker)
+    const post = await worker.find({_id: responsibleWorker})
     res.json(post)
   } catch (e) {
     res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })

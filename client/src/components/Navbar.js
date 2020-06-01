@@ -26,7 +26,8 @@ export const Navbar = () => {
                     <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
                     <li><NavLink to="/create">Создать</NavLink></li>
                     <li><NavLink to="/createreport">Создать отчет</NavLink></li>
-                    <li><NavLink to="/links">Список</NavLink></li>
+                    <li><NavLink to="/links">Поиск по сотруднику</NavLink></li>
+                    <li><NavLink to="/searchreports">Поиск по отчету</NavLink></li>
                     <li><a href="#" onClick={logoutHandler}>Выйти</a></li>
                 </ul>
             </div>

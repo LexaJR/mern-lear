@@ -6,6 +6,8 @@ import {DetailPage} from './pages/DetailPage'
 import {AuthPage} from './pages/AuthPage'
 import {CreateReport} from './pages/CreateReport'
 import {DefaultPage} from './pages/DefaultPage'
+import {SearchReports} from './pages/SearchReports'
+
 
 export const useRoutes = isAuthenticated => {
   if (isAuthenticated) {
@@ -23,9 +25,13 @@ export const useRoutes = isAuthenticated => {
         <Route path="/detail/:id">
           <DetailPage />
         </Route>
+        <Route path="/searchreports">
+        <SearchReports />
+        </Route>
         <Route path="/default">
           <DefaultPage />
         </Route>
+        
         <Redirect to="/default" />
       </Switch>
     )

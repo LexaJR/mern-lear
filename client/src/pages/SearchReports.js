@@ -1,13 +1,14 @@
 import React, {useState} from 'react'
 import {useHttp} from '../hooks/http.hook'
 
-export const LinksPage = () => {
+export const SearchReports = () => {
+
   const [workers, setWorkers] = useState([])
   const [reports, setReports] = useState([])
   const {request} = useHttp()
 
   const [form, setForm] = useState({
-    workerid: '', workerName: ''
+    responsibleWorker: ''
 })
 
 const changeHandler = event => {
@@ -17,32 +18,32 @@ const changeHandler = event => {
 
 const renderHandler = async () => {
   try {
-      // console.log({...form})
-      const data = await request('/api/search/reportsWorkers', 'POST', {...form})
-      setReports(data)
+      console.log({...form})
+      const data = await request('/api/search/workersReports', 'POST', {...form})
+      setWorkers(data)
   } catch (error) {}
 }
 
-const searchWorkers = async () => {
+const searchReports = async () => {
   try {
-      const data = await request('/api/search', 'POST', null)
-      setWorkers(data)
+      const data = await request('/api/search/searchReports', 'POST', null)
+      setReports(data)
   } catch (error) {console.log("Chto-to poshlo ne tak")}
 }
 
   return (
     <div>
-      <label htmlFor="placeWork">Выбор сотрудника</label>
+      <label htmlFor="responsibleWorker">Выбор сотрудника</label>
       <select 
       class="browser-default"
       id="responsibleWorker"
-      name="workerid" 
+      name="responsibleWorker" 
       onChange={changeHandler}
-      onMouseMove={searchWorkers}>
+      onMouseMove={searchReports}>
       <option value="" disabled selected>Choose your option</option>
-      { workers.map((worker) => {
+      { reports.map((report) => {
           return (
-          <option value={worker._id}>{worker.name}    {worker.surname}    {worker.patronymic}</option>
+          <option value={report.responsibleWorker}>{report.nameReport}</option>
           )
       })
       }
@@ -58,16 +59,24 @@ const searchWorkers = async () => {
       <thead>
       <tr>
         <th>№</th>
-        <th>Наименование отчета</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Отчество</th>
+        <th>Номер телефона</th>
+        <th>Емайл</th>
       </tr>
       </thead>
 
       <tbody>
-      { reports.map((report, index) => {
+      { workers.map((worker, index) => {
         return (
-          <tr key={workers._id}>
+          <tr key={worker._id}>
             <td>{index + 1}</td>
-            <td>{report.nameReport}</td>
+            <td>{worker.name}</td>
+            <td>{worker.surname}</td>
+            <td>{worker.patronymic}</td>
+            <td>{worker.phoneNumber}</td>
+            <td>{worker.email}</td>
           </tr>
         )
       }) }
