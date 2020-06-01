@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {useHttp} from '../hooks/http.hook'
 
-export const LinksPage = () => {
+export const SearchWorkers = () => {
   const [workers, setWorkers] = useState([])
   const [reports, setReports] = useState([])
   const {request} = useHttp()

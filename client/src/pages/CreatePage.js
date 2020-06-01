@@ -47,7 +47,7 @@ export const CreatePage = () => {
     return(
         <div className="card blue darken-2">
             <div className="card-content white-text">
-                        <span className="card-title">Создание пользователя</span>
+                        <span className="card-title">Создание сотрудника</span>
                         <div>
                             <div className="input-field">
                                 <input 

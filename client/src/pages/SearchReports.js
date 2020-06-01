@@ -13,7 +13,7 @@ export const SearchReports = () => {
 
 const changeHandler = event => {
   // console.log(event.target.name, + " " + event.target.value)
-  setForm({...form, [event.target.name]: event.target.value })
+setForm({...form, [event.target.name]: event.target.value })
 }
 
 const renderHandler = async () => {
