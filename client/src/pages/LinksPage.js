@@ -1,7 +1,7 @@
-import React, {useEffect, useState, useCallback} from 'react'
+import React, {useState} from 'react'
 import {useHttp} from '../hooks/http.hook'
 
-export const SearchWorkers = () => {
+export const LinksPage = () => {
   const [workers, setWorkers] = useState([])
   const [reports, setReports] = useState([])
   const {request} = useHttp()
@@ -23,16 +23,12 @@ const renderHandler = async () => {
   } catch (error) {}
 }
 
-const searchWorkers = useCallback(async () => {
+const searchWorkers = async () => {
   try {
       const data = await request('/api/search', 'POST', null)
       setWorkers(data)
   } catch (error) {console.log("Chto-to poshlo ne tak")}
-}, [request])
-
-useEffect(() => {
-  searchWorkers()
-}, [searchWorkers])
+}
 
   return (
     <div>
@@ -41,7 +37,8 @@ useEffect(() => {
       class="browser-default"
       id="responsibleWorker"
       name="workerid" 
-      onChange={changeHandler}>
+      onChange={changeHandler}
+      onMouseMove={searchWorkers}>
       <option value="" disabled selected>Choose your option</option>
       { workers.map((worker) => {
           return (

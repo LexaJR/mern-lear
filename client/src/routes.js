@@ -1,12 +1,13 @@
 import React from 'react'
 import {Switch, Route, Redirect} from 'react-router-dom'
-import {SearchWorkers} from './pages/SearchWorkers'
+import {LinksPage} from './pages/LinksPage'
 import {CreatePage} from './pages/CreatePage'
 import {DetailPage} from './pages/DetailPage'
 import {AuthPage} from './pages/AuthPage'
 import {CreateReport} from './pages/CreateReport'
 import {DefaultPage} from './pages/DefaultPage'
 import {SearchReports} from './pages/SearchReports'
+import {SearchWorkers} from './pages/SearchWorkers'
 import {ListWorkerPage} from './pages/ListWorkerPage'
 
 
@@ -14,8 +15,8 @@ export const useRoutes = isAuthenticated => {
   if (isAuthenticated) {
     return (
       <Switch>
-        <Route path="/searchworker" exact>
-          <SearchWorkers />
+        <Route path="/links" exact>
+          <LinksPage />
         </Route>
         <Route path="/create" exact>
           <CreatePage />
@@ -29,11 +30,14 @@ export const useRoutes = isAuthenticated => {
         <Route path="/searchreports">
         <SearchReports />
         </Route>
-        <Route path="/listworker">
-        <ListWorkerPage />
-        </Route>
         <Route path="/default">
           <DefaultPage />
+        </Route>
+        <Route path="/searchworker">
+          <SearchWorkers />
+        </Route>
+        <Route path="/listworker">
+          <ListWorkerPage />
         </Route>
         
         <Redirect to="/default" />

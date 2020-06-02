@@ -17,19 +17,12 @@ export const Navbar = () => {
             <div className="nav-wrapper blue darken-1 padding2rem">
             <NavLink to="/default" className="brand-logo">РМИАЦ</NavLink>
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
-                <ul id="dropdown1" class="dropdown-content">
-                    <li><a href="#!">one</a></li>
-                    <li><a href="#!">two</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#!">three</a></li>
-                </ul>
-                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
                     <li><NavLink to="/create">Создать сотрудника</NavLink></li>
                     <li><NavLink to="/createreport">Создать отчет</NavLink></li>
                     <li><NavLink to="/searchworker">Поиск по сотруднику</NavLink></li>
                     <li><NavLink to="/searchreports">Поиск по отчету</NavLink></li>
                     <li><NavLink to="/listworker">Список сотрудников</NavLink></li>
-                    <li><a href="#" onClick={logoutHandler}>Выйти</a></li>
+                    <li><a href="/" onClick={logoutHandler}>Выйти</a></li>
                 </ul>
             </div>
           

@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 export const LinksList = ({ workers }) => {
   // console.log(workers)
@@ -16,6 +17,7 @@ export const LinksList = ({ workers }) => {
         <th>Отчество</th>
         <th>Номер телефона</th>
         <th>Емайл</th>
+        <th>Редактировать</th>
       </tr>
       </thead>
 
@@ -29,6 +31,9 @@ export const LinksList = ({ workers }) => {
             <td>{worker.patronymic}</td>
             <td>{worker.phoneNumber}</td>
             <td>{worker.email}</td>
+            <td>
+              <Link to={`/detail/${worker._id}`}>Редактировать</Link>
+            </td>
           </tr>
         )
       }) }

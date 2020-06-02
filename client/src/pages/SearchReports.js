@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect, useCallback} from 'react'
 import {useHttp} from '../hooks/http.hook'
 
 export const SearchReports = () => {
@@ -9,27 +9,31 @@ export const SearchReports = () => {
 
   const [form, setForm] = useState({
     responsibleWorker: ''
-})
+  })
 
-const changeHandler = event => {
-  // console.log(event.target.name, + " " + event.target.value)
-setForm({...form, [event.target.name]: event.target.value })
-}
+  const changeHandler = event => {
+    // console.log(event.target.name, + " " + event.target.value)
+    setForm({...form, [event.target.name]: event.target.value })
+  }
 
-const renderHandler = async () => {
-  try {
-      console.log({...form})
-      const data = await request('/api/search/workersReports', 'POST', {...form})
-      setWorkers(data)
-  } catch (error) {}
-}
+  const renderHandler = async () => {
+    try {
+        console.log({...form})
+        const data = await request('/api/search/workersReports', 'POST', {...form})
+        setWorkers(data)
+    } catch (error) {}
+  }
 
-const searchReports = async () => {
-  try {
-      const data = await request('/api/search/searchReports', 'POST', null)
-      setReports(data)
-  } catch (error) {console.log("Chto-to poshlo ne tak")}
-}
+  const searchReports = useCallback(async () => {
+    try {
+        const data = await request('/api/search/searchReports', 'POST', null)
+        setReports(data)
+    } catch (error) {console.log("Chto-to poshlo ne tak")}
+  }, [request])
+
+  useEffect(() => {
+    searchReports()
+  }, [searchReports])
 
   return (
     <div>

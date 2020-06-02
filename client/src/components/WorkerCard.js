@@ -1,14 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, {useState, useEffect, useCallback} from 'react'
 import {useHttp} from '../hooks/http.hook'
-import { useMessage } from '../hooks/message.hook'
-import 'materialize-css'
 
-export const CreatePage = () => {
+export const WorkerCard = ({ worker }) => {
     const [placeWorks, setPlaceWorks] = useState([])
     const [posts, setPosts] = useState([])
-    const message = useMessage()
-    const {loading, error, request, clearError} = useHttp()
-
+    const {request} = useHttp()
     const [form, setForm] = useState({
         name: '', surname: '', patronymic: '', phoneNumber: '', email: '', placeWork: '', namePost: ''
     })
@@ -18,36 +14,34 @@ export const CreatePage = () => {
         setForm({...form, [event.target.name]: event.target.value })
     }
 
-    const createHandler = async () => {
-        try {
-            // console.log({...form})
-            const data = await request('/api/create/worker', 'POST', {...form})
-            // const data = await request('/api/create/post', 'POST', {...form})
-            message(data.message)
-        } catch (error) {message(error.message)}
-    }
     const searchPlaceWorksHandler = useCallback(async () => {
         try {
             const data = await request('/api/search/med', 'POST', null)
             setPlaceWorks(data)
         } catch (error) {console.log("Chto-to poshlo ne tak")}
-    }, [])
+    }, [request])
+
     const searchPostsHandler = useCallback(async () => {
         try {
             const post = await request('/api/search/posts', 'POST', null)
             setPosts(post)
         } catch (error) {console.log("Chto-to poshlo ne tak")}
-    }, [])
+    }, [request])
+
+    const updateHandler = event => {
+
+    }
 
     useEffect(() => {
         window.M.updateTextFields()
         searchPlaceWorksHandler()
         searchPostsHandler()
     }, [searchPlaceWorksHandler, searchPostsHandler])
-    return(
-        <div className="card blue darken-2">
+    
+  return (
+    <div className="card blue darken-2">
             <div className="card-content white-text">
-                        <span className="card-title">Создание пользователя</span>
+                        <span className="card-title">Создание сотрудника</span>
                         <div>
                             <div className="input-field">
                                 <input 
@@ -56,7 +50,7 @@ export const CreatePage = () => {
                                 type="text"
                                 name="name" 
                                 className="yellow-input"
-                                value={form.name}
+                                value={worker.name}
                                 onChange={changeHandler}
                                 />
                                 <label htmlFor="name">Имя</label>
@@ -68,7 +62,7 @@ export const CreatePage = () => {
                                 type="text"
                                 name="surname" 
                                 className="yellow-input"
-                                value={form.surname}
+                                value={worker.surname}
                                 onChange={changeHandler}
                                 />
                                 <label htmlFor="surname">Фамилия</label>
@@ -80,7 +74,7 @@ export const CreatePage = () => {
                                 type="text"
                                 name="patronymic" 
                                 className="yellow-input"
-                                value={form.patronymic}
+                                value={worker.patronymic}
                                 onChange={changeHandler}
                                 />
                                 <label htmlFor="patronymic">Отчество</label>
@@ -92,7 +86,7 @@ export const CreatePage = () => {
                                 type="text"
                                 name="phoneNumber" 
                                 className="yellow-input"
-                                value={form.phoneNumber}
+                                value={worker.phoneNumber}
                                 onChange={changeHandler}
                                 />
                                 <label htmlFor="phoneNumber">Номер телефона</label>
@@ -104,7 +98,7 @@ export const CreatePage = () => {
                                 type="text"
                                 name="email" 
                                 className="yellow-input"
-                                value={form.email}
+                                value={worker.email}
                                 onChange={changeHandler}
                                 />
                                 <label htmlFor="email">Адресс электроной почты</label>
@@ -115,7 +109,7 @@ export const CreatePage = () => {
                             id="placeWork"
                             name="placeWork" 
                             onChange={changeHandler}>
-                            <option value="" disabled selected>Choose your option</option>
+                            <option value={worker.placeWork} disabled selected>Текущее место работы</option>
                             { placeWorks.map((placeWork) => {
                                 return (
                                 <option value={placeWork._id}>{placeWork.namePlaceWork}</option>
@@ -129,7 +123,7 @@ export const CreatePage = () => {
                             id="namePost"
                             name="namePost" 
                             onChange={changeHandler}>
-                            <option value="" disabled selected>Choose your option</option>
+                            <option value={worker.post} disabled selected>Текущая должность</option>
                             { posts.map((post) => {
                                 return (
                                 <option value={post._id}>{post.namePost}</option>
@@ -140,15 +134,14 @@ export const CreatePage = () => {
                             <div className="card-action">
                                 <button 
                                 className="btn waves-effect waves-ligh yellow darken-2 marginRight10"
-                                onClick={createHandler}
+                                onClick={updateHandler}
                                 // disabled={loading}
                                 >
-                                    Создать
+                                    Сохранить изменения
                                 </button>
                             </div>
                 </div>
             </div>
         </div>
-    )
-
+  )
 }

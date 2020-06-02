@@ -11,14 +11,6 @@ export const AuthPage = () => {
         email: '', password: ''
     })
 
-    const pressHandler = async event => {
-        if (event.key === 'Enter') {
-          try {
-            loginHandler()
-          } catch (e) {}
-        }
-      }
-
     useEffect( () => {
         message(error)
         clearError()
@@ -71,7 +63,6 @@ export const AuthPage = () => {
                                 className="yellow-input"
                                 value={form.password}
                                 onChange={changeHandler}
-                                onKeyPress={pressHandler}
                                 />
                                 <label htmlFor="password">Пароль</label>
                             </div>

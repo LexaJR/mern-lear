@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useEffect, useState} from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import {useHttp} from '../hooks/http.hook'
 import {LinksList} from '../components/LinksList'
 import {Loader} from '../components/Loader'

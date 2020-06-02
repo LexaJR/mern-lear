@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useCallback} from 'react'
 import {useHttp} from '../hooks/http.hook'
 import { useMessage } from '../hooks/message.hook'
 import 'materialize-css'
@@ -6,7 +6,7 @@ import 'materialize-css'
 export const CreateReport = () => {
     const [workers, setWorkers] = useState([])
     const message = useMessage()
-    const {loading, error, request, clearError} = useHttp()
+    const {request} = useHttp()
 
     const [form, setForm] = useState({
         nameReport: '', responsibleWorker: ''
@@ -16,12 +16,12 @@ export const CreateReport = () => {
         window.M.updateTextFields()
     }, [])
 
-    const searchWorkers = async () => {
+    const searchWorkers = useCallback(async () => {
         try {
             const data = await request('/api/search', 'POST', null)
             setWorkers(data)
         } catch (error) {console.log("Chto-to poshlo ne tak")}
-    }
+    }, [request])
 
     const changeHandler = event => {
         // console.log(event.target.name, + " " + event.target.value)
@@ -35,6 +35,10 @@ export const CreateReport = () => {
             message(data.message)
         } catch (error) {}
     }
+
+    useEffect(() => {
+        searchWorkers()
+      }, [searchWorkers])
 
     return(
         <div className="card blue darken-2">
@@ -50,7 +54,6 @@ export const CreateReport = () => {
                                 className="yellow-input"
                                 value={form.name}
                                 onChange={changeHandler}
-                                onClick={searchWorkers}
                                 />
                                 <label htmlFor="nameReport">Наименование отчета</label>
                             </div>
