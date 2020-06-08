@@ -7,7 +7,7 @@ export const CreatePage = () => {
     const [placeWorks, setPlaceWorks] = useState([])
     const [posts, setPosts] = useState([])
     const message = useMessage()
-    const {loading, error, request, clearError} = useHttp()
+    const {request} = useHttp()
 
     const [form, setForm] = useState({
         name: '', surname: '', patronymic: '', phoneNumber: '', email: '', placeWork: '', namePost: ''
@@ -31,13 +31,13 @@ export const CreatePage = () => {
             const data = await request('/api/search/med', 'POST', null)
             setPlaceWorks(data)
         } catch (error) {console.log("Chto-to poshlo ne tak")}
-    }, [])
+    }, [request])
     const searchPostsHandler = useCallback(async () => {
         try {
             const post = await request('/api/search/posts', 'POST', null)
             setPosts(post)
         } catch (error) {console.log("Chto-to poshlo ne tak")}
-    }, [])
+    }, [request])
 
     useEffect(() => {
         window.M.updateTextFields()

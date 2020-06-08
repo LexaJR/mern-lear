@@ -18,7 +18,6 @@ export const SearchReports = () => {
 
   const renderHandler = async () => {
     try {
-        console.log({...form})
         const data = await request('/api/search/workersReports', 'POST', {...form})
         setWorkers(data)
     } catch (error) {}

@@ -1,18 +1,21 @@
 import React, {useState, useEffect, useCallback} from 'react'
+import { useMessage } from '../hooks/message.hook'
 import {useHttp} from '../hooks/http.hook'
 
 export const WorkerCard = ({ worker }) => {
     const [placeWorks, setPlaceWorks] = useState([])
     const [posts, setPosts] = useState([])
     const {request} = useHttp()
+    const message = useMessage()
     const [form, setForm] = useState({
-        name: '', surname: '', patronymic: '', phoneNumber: '', email: '', placeWork: '', namePost: ''
+        _id: worker._id, name: worker.name, surname: worker.surname, patronymic: worker.patronymic, phoneNumber: worker.phoneNumber, email: worker.email, placeWork: worker.placeWork, namePost: worker.post
     })
 
-    const changeHandler = event => {
-        // console.log(event.target.name, + " " + event.target.value)
-        setForm({...form, [event.target.name]: event.target.value })
-    }
+    // const [name, setName] = useState(worker.name);
+    // const [surname, setSurname] = useState(worker.surname);
+    // const [patronymic, setPatronymic] = useState(worker.patronymic);
+    // const [phoneNumber, setPhoneNumber] = useState(worker.phoneNumber);
+    // const [email, setEmail] = useState(worker.email);
 
     const searchPlaceWorksHandler = useCallback(async () => {
         try {
@@ -28,15 +31,24 @@ export const WorkerCard = ({ worker }) => {
         } catch (error) {console.log("Chto-to poshlo ne tak")}
     }, [request])
 
-    const updateHandler = event => {
-
+    const updateHandler = async () => {
+        console.log(form)
+        const data = await request('/api/update/worker', 'POST', {...form})
+        message(data.message)
     }
 
     useEffect(() => {
         window.M.updateTextFields()
         searchPlaceWorksHandler()
         searchPostsHandler()
-    }, [searchPlaceWorksHandler, searchPostsHandler])
+    }, [searchPlaceWorksHandler, searchPostsHandler, setForm])
+
+    const changeHandler = event => {
+        console.log(event.target.name, + " " + event.target.value)
+        console.log(form)
+        setForm({...form, [event.target.name]: event.target.value })
+        //setForm({form, _id: worker._id })
+    }
     
   return (
     <div className="card blue darken-2">
@@ -50,7 +62,7 @@ export const WorkerCard = ({ worker }) => {
                                 type="text"
                                 name="name" 
                                 className="yellow-input"
-                                value={worker.name}
+                                value={form.name}
                                 onChange={changeHandler}
                                 />
                                 <label htmlFor="name">Имя</label>
@@ -62,7 +74,7 @@ export const WorkerCard = ({ worker }) => {
                                 type="text"
                                 name="surname" 
                                 className="yellow-input"
-                                value={worker.surname}
+                                value={form.surname}
                                 onChange={changeHandler}
                                 />
                                 <label htmlFor="surname">Фамилия</label>
@@ -74,7 +86,7 @@ export const WorkerCard = ({ worker }) => {
                                 type="text"
                                 name="patronymic" 
                                 className="yellow-input"
-                                value={worker.patronymic}
+                                value={form.patronymic}
                                 onChange={changeHandler}
                                 />
                                 <label htmlFor="patronymic">Отчество</label>
@@ -86,7 +98,7 @@ export const WorkerCard = ({ worker }) => {
                                 type="text"
                                 name="phoneNumber" 
                                 className="yellow-input"
-                                value={worker.phoneNumber}
+                                value={form.phoneNumber}
                                 onChange={changeHandler}
                                 />
                                 <label htmlFor="phoneNumber">Номер телефона</label>
@@ -98,7 +110,7 @@ export const WorkerCard = ({ worker }) => {
                                 type="text"
                                 name="email" 
                                 className="yellow-input"
-                                value={worker.email}
+                                value={form.email}
                                 onChange={changeHandler}
                                 />
                                 <label htmlFor="email">Адресс электроной почты</label>

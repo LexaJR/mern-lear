@@ -3,9 +3,7 @@ const Worker = require('../models/workers')
 const directoryPlaceWork = require('../models/directoryPlaceWork')
 const directoryPosts = require('../models/directoryPost')
 const reports = require('../models/reports')
-const bcrypt = require('bcryptjs')
 const {check, validationResult} = require('express-validator')
-const jwt = require('jsonwebtoken')
 const router = Router()
 
 router.post(
