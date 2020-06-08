@@ -36,5 +36,16 @@ router.post(
         res.status(500).json({ message: "Что-то пошло не так"})
     }
 })
+router.post('/addWorkerReport', async (req, res) => {
+    try {
+      const {id, workerid} = req.body
+      console.log(req.body.id + "    " + req.body.workerid)
+      const report = await reports.findById(id)
+      report.updateOne({_id: id}, {$push: {responsibleWorker: workerid}})
+      res.status(201).json({message: 'Сотрудник добавлен'})
+    } catch (e) {
+      res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+    }
+  })
 
 module.exports = router

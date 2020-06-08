@@ -22,6 +22,7 @@ export const Navbar = () => {
                     <li><NavLink to="/searchworker">Поиск по сотруднику</NavLink></li>
                     <li><NavLink to="/searchreports">Поиск по отчету</NavLink></li>
                     <li><NavLink to="/listworker">Список сотрудников</NavLink></li>
+                    <li><NavLink to="/updateReport">Редактирование отчета</NavLink></li>
                     <li><a href="/" onClick={logoutHandler}>Выйти</a></li>
                 </ul>
             </div>
