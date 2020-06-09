@@ -1,4 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react'
+import {Link} from 'react-router-dom'
 import {useHttp} from '../hooks/http.hook'
 import { useMessage } from '../hooks/message.hook'
 
@@ -40,6 +41,7 @@ export const UpdateReport = () => {
     try {
       const data = await request('/api/update/addWorkerReport', 'POST', {...form})
       message(data.message)
+      RenderTable()
     } catch (error) {}
   }
 
@@ -107,6 +109,7 @@ export const UpdateReport = () => {
         <th>Отчество</th>
         <th>Номер телефона</th>
         <th>Емайл</th>
+        <th>Удаление</th>
       </tr>
       </thead>
 
@@ -120,6 +123,7 @@ export const UpdateReport = () => {
             <td>{worker.patronymic}</td>
             <td>{worker.phoneNumber}</td>
             <td>{worker.email}</td>
+            <td><Link to={`*`}>Удалить</Link></td>
           </tr>
         )
       }) }

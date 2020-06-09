@@ -22,12 +22,6 @@ export const AuthPage = () => {
     const changeHandler = event => {
         setForm({...form, [event.target.name]: event.target.value })
     }
-    const registerHandler = async () => {
-        try {
-            const data = await request('/api/auth/register', 'POST', {...form})
-            message(data.message)
-        } catch (error) {}
-    }
     const loginHandler = async () => {
         try {
             const data = await request('/api/auth/login', 'POST', {...form})
@@ -75,13 +69,6 @@ export const AuthPage = () => {
                         disabled={loading}
                         >
                             Войти
-                        </button>
-                        <button 
-                        className="btn waves-effect waves-ligh yellow darken-4"
-                        onClick={registerHandler}
-                        disabled={loading}
-                        >
-                            Регистрация
                         </button>
                     </div>
                 </div>

@@ -23,7 +23,6 @@ router.post(
             })
         }
         const {_id, name, surname, patronymic, phoneNumber, email, placeWork, namePost} = req.body
-        // console.log(name, surname, patronymic, phoneNumber, email, placeWork, namePost)
         
         const doc = await worker.findOne({ _id });
 
@@ -39,10 +38,11 @@ router.post(
 router.post('/addWorkerReport', async (req, res) => {
     try {
       const {id, workerid} = req.body
-      console.log(req.body.id + "    " + req.body.workerid)
-      const report = await reports.findById(id)
-      report.updateOne({_id: id}, {$push: {responsibleWorker: workerid}})
+
+      await reports.update({_id: id}, {$push: {responsibleWorker: workerid}})
+
       res.status(201).json({message: 'Сотрудник добавлен'})
+      
     } catch (e) {
       res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
     }
