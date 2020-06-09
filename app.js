@@ -10,6 +10,7 @@ app.use('/api/auth', require('./routes/auth.routes'))
 app.use('/api/create', require('./routes/create.routers'))
 app.use('/api/search', require('./routes/search.routers'))
 app.use('/api/update', require('./routes/update.routers'))
+app.use('/api/delete', require('./routes/delete.routers'))
 
 const PORT = config.get('port') || 5000
 

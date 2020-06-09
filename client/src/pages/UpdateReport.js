@@ -123,7 +123,7 @@ export const UpdateReport = () => {
             <td>{worker.patronymic}</td>
             <td>{worker.phoneNumber}</td>
             <td>{worker.email}</td>
-            <td><Link to={`*`}>Удалить</Link></td>
+            <td><Link to={`#`}>Удалить</Link></td>
           </tr>
         )
       }) }
@@ -132,3 +132,4 @@ export const UpdateReport = () => {
       </div>
   )
 }
+// <td><Link to={`/api/delete/unsetWorker/${form.id}&${worker._id}`}>Удалить</Link></td>
