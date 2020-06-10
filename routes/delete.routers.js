@@ -6,9 +6,10 @@ const reports = require('../models/reports')
 
 const router = Router()
 
-router.get('/unsetWorker:id&workerid',  async (req, res) => {
+router.post('/unsetWorker',  async (req, res) => {
     try {
         const {id, workerid} = req.body
+        console.log(id + "  " + workerid)
         await reports.update({_id: id}, {$unset: {responsibleWorker: workerid}})
         res.json("Удален сотрудник")
     } catch (e) {
