@@ -7,7 +7,7 @@ export const UpdateReport = () => {
   const {request} = useHttp()
   const [reports, setReports] = useState([])
   const [form, setForm] = useState({
-    id: '', workerid: ''
+    id: '', workerid: '', workerids: ''
   })
   const message = useMessage()
   const [workers, setWorkers] = useState([])
