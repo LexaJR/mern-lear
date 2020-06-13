@@ -7,7 +7,7 @@ export const UpdateReport = () => {
   const {request} = useHttp()
   const [reports, setReports] = useState([])
   const [form, setForm] = useState({
-    id: '', workerid: '', workerids: ''
+    id: '', workerid: '', workerids: '', workeridunset: ''
   })
   const message = useMessage()
   const [workers, setWorkers] = useState([])
@@ -45,9 +45,13 @@ export const UpdateReport = () => {
     } catch (error) {}
   }
 
-  const unsetWorker = async () => {
+  const unsetWorker = async (event) => {
     try {
-      const data = await request('/api/delete/unsetWorker', 'POST', [form.id, form.workerid])
+      //setForm({...form, workeridunset: event.target.value })
+      console.log(event.target.name + "   " + event.target.value)
+      console.log(form.id+ "   " +form.workeridunset)
+      //console.log(form)
+      const data = await request('/api/delete/unsetWorker', 'POST', [form.id, form.workeridunset])
       message(data.message)
       RenderTable()
     } catch (error) {}
@@ -131,7 +135,7 @@ export const UpdateReport = () => {
             <td>{worker.patronymic}</td>
             <td>{worker.phoneNumber}</td>
             <td>{worker.email}</td>
-            <td><a onClick={unsetWorker} to={`#`}>Удалить</a></td>
+            <td><button onClick={unsetWorker} to={`#`} value={index + 1} onMouseOver={changeHandler} name="workeridunset">Удалить</button></td>
           </tr>
         )
       }) }
