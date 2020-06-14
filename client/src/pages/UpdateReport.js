@@ -1,5 +1,4 @@
 import React, {useCallback, useEffect, useState} from 'react'
-import {Link} from 'react-router-dom'
 import {useHttp} from '../hooks/http.hook'
 import { useMessage } from '../hooks/message.hook'
 
@@ -48,8 +47,8 @@ export const UpdateReport = () => {
   const unsetWorker = async (event) => {
     try {
       //setForm({...form, workeridunset: event.target.value })
-      console.log(event.target.name + "   " + event.target.value)
-      console.log(form.id+ "   " +form.workeridunset)
+      //console.log(event.target.name + "   " + event.target.value)
+      //console.log(form.id+ "   " +form.workeridunset)
       //console.log(form)
       const data = await request('/api/delete/unsetWorker', 'POST', [form.id, form.workeridunset])
       message(data.message)

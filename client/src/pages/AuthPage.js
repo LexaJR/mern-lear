@@ -8,7 +8,7 @@ export const AuthPage = () => {
     const message = useMessage()
     const {loading, error, request, clearError} = useHttp()
     const [form, setForm] = useState({
-        email: '', password: ''
+        login: '', password: ''
     })
 
     useEffect( () => {
@@ -38,15 +38,15 @@ export const AuthPage = () => {
                         <div>
                             <div className="input-field">
                                 <input 
-                                placeholder="Введите email" 
-                                id="email" 
+                                placeholder="Введите login" 
+                                id="login" 
                                 type="text"
-                                name="email" 
+                                name="login" 
                                 className="yellow-input"
                                 value={form.email}
                                 onChange={changeHandler}
                                 />
-                                <label htmlFor="email">Email</label>
+                                <label htmlFor="login">Login</label>
                             </div>
                             <div className="input-field">
                                 <input 

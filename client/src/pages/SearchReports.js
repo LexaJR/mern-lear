@@ -1,64 +1,74 @@
-import React, {useState, useEffect, useCallback} from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import {useHttp} from '../hooks/http.hook'
 
 export const SearchReports = () => {
-
-  const [workers, setWorkers] = useState([])
-  const [reports, setReports] = useState([])
   const {request} = useHttp()
-
+  const [reports, setReports] = useState([])
   const [form, setForm] = useState({
-    responsibleWorker: ''
+    id: '', workerid: '', workerids: '', workeridunset: ''
   })
-
-  const changeHandler = event => {
-    // console.log(event.target.name, + " " + event.target.value)
-    setForm({...form, [event.target.name]: event.target.value })
-  }
-
-  const renderHandler = async () => {
-    try {
-        const data = await request('/api/search/workersReports', 'POST', {...form})
-        // console.log(data)
-        setWorkers(data)
-    } catch (error) {}
-  }
+  const [workers, setWorkers] = useState([])
+  const [workersList, setWorkersList] = useState([])
 
   const searchReports = useCallback(async () => {
     try {
-        const data = await request('/api/search/searchReports', 'POST', null)
+        const data = await request('/api/search/searchReports', 'POST', {...form})
         setReports(data)
     } catch (error) {console.log("Chto-to poshlo ne tak")}
   }, [request])
 
+
+
+  const RenderTable = async () => {
+    try {
+        const ids = await request('/api/search/workersReportsById', 'POST', {...form})
+        const data = await request('/api/search/workersById', 'POST', ids)
+        setWorkers(data)
+    } catch (error) {}
+  }
+
+  const searchWorkers = useCallback(async () => {
+    try {
+        const data = await request('/api/search', 'POST', null)
+        setWorkersList(data)
+    } catch (error) {console.log("Chto-to poshlo ne tak")}
+  }, [request])
+
+
+  const changeHandler = event => {
+    setForm({...form, [event.target.name]: event.target.value })
+  }
+
   useEffect(() => {
     searchReports()
-  }, [searchReports])
+    searchWorkers()
+  }, [searchReports, searchWorkers])
+
 
   return (
     <div>
       <label htmlFor="responsibleWorker">Выбор сотрудника</label>
       <select 
       class="browser-default"
-      id="responsibleWorker"
-      name="responsibleWorker" 
-      onChange={changeHandler}
-      onMouseMove={searchReports}>
+      id="id"
+      name="id"
+      onChange={changeHandler} 
+      >
       <option value="" disabled selected>Choose your option</option>
       { reports.map((report) => {
           return (
-          <option value={report.responsibleWorker}>{report.nameReport}</option>
+          <option value={report._id}>{report.nameReport}</option>
           )
       })
       }
       </select>
       <button 
         className="btn waves-effect waves-ligh yellow darken-2 marginRight10"
-        onClick={renderHandler}
+        onClick={RenderTable}
         // disabled={loading}
         >
-            Создать
-        </button>
+            Таблица
+      </button>
       <table>
       <thead>
       <tr>
@@ -86,6 +96,7 @@ export const SearchReports = () => {
       }) }
       </tbody>
     </table>
-    </div>
+      </div>
   )
 }
+// <td><Link to={`/api/delete/unsetWorker/${form.id}&${worker._id}`}>Удалить</Link></td>   onClick={unsetWorker(worker._id)}  setForm({...form, workerid: worker._id })
