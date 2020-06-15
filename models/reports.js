@@ -5,8 +5,8 @@ const schema = new Schema({
     responsibleWorker: [{ type: Types.ObjectId, ref: 'workers' }],
     mounthlyCheakpoint: {type: Boolean},
     dataCheak: {type: Date},
-    categoryUrgentReport: [{ type: Types.ObjectId, ref: 'directoryCategoryUrgentReport' }],
-    typeReport: [{ type: Types.ObjectId, ref: 'directoryTypeReport' }],
+    categoryUrgentReport: { type: Types.ObjectId, ref: 'directoryCategoryUrgentReport' },
+    typeReport: { type: Types.ObjectId, ref: 'directoryTypeReport' },
 })
 
 module.exports = model('reports', schema)

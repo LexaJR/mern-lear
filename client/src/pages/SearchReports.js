@@ -67,7 +67,7 @@ export const SearchReports = () => {
         onClick={RenderTable}
         // disabled={loading}
         >
-            Таблица
+            Поиск
       </button>
       <table>
       <thead>

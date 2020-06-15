@@ -46,10 +46,6 @@ export const UpdateReport = () => {
 
   const unsetWorker = async (event) => {
     try {
-      //setForm({...form, workeridunset: event.target.value })
-      //console.log(event.target.name + "   " + event.target.value)
-      //console.log(form.id+ "   " +form.workeridunset)
-      //console.log(form)
       const data = await request('/api/delete/unsetWorker', 'POST', [form.id, form.workeridunset])
       message(data.message)
       RenderTable()
@@ -120,7 +116,6 @@ export const UpdateReport = () => {
         <th>Отчество</th>
         <th>Номер телефона</th>
         <th>Емайл</th>
-        <th>Удаление</th>
       </tr>
       </thead>
 
@@ -134,7 +129,6 @@ export const UpdateReport = () => {
             <td>{worker.patronymic}</td>
             <td>{worker.phoneNumber}</td>
             <td>{worker.email}</td>
-            <td><button onClick={unsetWorker} to={`#`} value={index + 1} onMouseOver={changeHandler} name="workeridunset">Удалить</button></td>
           </tr>
         )
       }) }
@@ -144,3 +138,4 @@ export const UpdateReport = () => {
   )
 }
 // <td><Link to={`/api/delete/unsetWorker/${form.id}&${worker._id}`}>Удалить</Link></td>   onClick={unsetWorker(worker._id)}  setForm({...form, workerid: worker._id })
+// <td><button onClick={unsetWorker} to={`#`} value={index + 1} onMouseOver={changeHandler} name="workeridunset">Удалить</button></td>
