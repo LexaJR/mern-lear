@@ -4,15 +4,31 @@ import {useHttp} from '../hooks/http.hook'
 export const SearchWorkers = () => {
   const [workers, setWorkers] = useState([])
   const [reports, setReports] = useState([])
+  const [placeWorks, setPlaceWorks] = useState([])
   const {request} = useHttp()
 
   const [form, setForm] = useState({
-    workerid: '', workerName: ''
+    workerid: '', placeWork: ''
 })
 
 const changeHandler = event => {
   // console.log(event.target.name, + " " + event.target.value)
   setForm({...form, [event.target.name]: event.target.value })
+}
+
+const changeHandlerMed = event => {
+  // console.log(event.target.name, + " " + event.target.value)
+  setForm({...form, [event.target.name]: event.target.value })
+  searchWorkerByMed()
+}
+
+const searchWorkerByMed = async () => {
+  try {
+      // console.log({...form})
+      const data = await request('/api/search/workersByMed', 'POST', {...form})
+      console.log({form})
+      setWorkers(data)
+  } catch (error) {}
 }
 
 const renderHandler = async () => {
@@ -30,12 +46,33 @@ const searchWorkers = useCallback(async () => {
   } catch (error) {console.log("Chto-to poshlo ne tak")}
 }, [request])
 
+const searchPlaceWorks = useCallback(async () => {
+  try {
+      const data = await request('/api/search/med', 'POST', null)
+      setPlaceWorks(data)
+  } catch (error) {console.log("Chto-to poshlo ne tak")}
+}, [request])
+
 useEffect(() => {
-  searchWorkers()
-}, [searchWorkers])
+  searchPlaceWorks()
+}, [])
 
   return (
     <div>
+      <label htmlFor="placeWork">Выбор больницы</label>
+      <select 
+      class="browser-default"
+      id="responsibleWorker"
+      name="placeWork" 
+      onChange={changeHandlerMed}>
+      <option value="" disabled selected>Choose your option</option>
+      { placeWorks.map((placeWork) => {
+          return (
+          <option value={placeWork._id}>{placeWork.namePlaceWork}</option>
+          )
+      })
+      }
+      </select>
       <label htmlFor="placeWork">Выбор сотрудника</label>
       <select 
       class="browser-default"

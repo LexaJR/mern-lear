@@ -116,6 +116,7 @@ export const UpdateReport = () => {
         <th>Отчество</th>
         <th>Номер телефона</th>
         <th>Емайл</th>
+        <th>Удалить</th>
       </tr>
       </thead>
 
@@ -129,6 +130,7 @@ export const UpdateReport = () => {
             <td>{worker.patronymic}</td>
             <td>{worker.phoneNumber}</td>
             <td>{worker.email}</td>
+            <td><button onClick={unsetWorker} to={`#`} value={worker._id} onMouseOver={changeHandler} name="workeridunset">Удалить</button></td>
           </tr>
         )
       }) }

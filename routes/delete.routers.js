@@ -8,12 +8,15 @@ const router = Router()
 
 router.post('/unsetWorker',  async (req, res) => {
     try {
-        //console.log(req)
-        //const {id, workeridunset} = req.body
+        // console.log(req)
+        // const {id, workeridunset} = req.body
         // console.log(id + "  " + workerid)
-        console.log(req.body[0] + "   " + -req.body[1])
         if (req.body[0] && req.body[1]){
-          await reports.findOneAndUpdate({_id: req.body[0]}, {$pop: {responsibleWorker: -req.body[1]}})
+          // console.log("start")
+          // const report = await reports.find({_id: req.body[0]})
+          // await report.deleteOne({responsibleWorker: req.body[1]})
+          await reports.updateOne({_id: req.body[0]}, {$pull: {responsibleWorker: req.body[1]}})
+
           res.json("Удален сотрудник")
         }
     } catch (e) {

@@ -80,8 +80,16 @@ router.post('/reportsWorkers', async (req, res) => {
 router.post('/workersReports', async (req, res) => {
   try {
     const {responsibleWorker} = req.body
-    // console.log(req.body.responsibleWorker)
     const data = await worker.find({_id: responsibleWorker})
+    res.json(data)
+  } catch (e) {
+    res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+  }
+})
+router.post('/workersByMed', async (req, res) => {
+  try {
+    const {placeWork} = req.body
+    const data = await worker.find({placeWork: placeWork})
     res.json(data)
   } catch (e) {
     res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
