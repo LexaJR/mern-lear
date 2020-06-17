@@ -16,7 +16,7 @@ const changeHandler = event => {
   setForm({...form, [event.target.name]: event.target.value })
 }
 
-const changeHandlerMed = event => {
+const changeHandlerMed = async (event) => {
   // console.log(event.target.name, + " " + event.target.value)
   setForm({...form, [event.target.name]: event.target.value })
   searchWorkerByMed()
@@ -26,7 +26,6 @@ const searchWorkerByMed = async () => {
   try {
       // console.log({...form})
       const data = await request('/api/search/workersByMed', 'POST', {...form})
-      console.log({form})
       setWorkers(data)
   } catch (error) {}
 }

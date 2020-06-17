@@ -37,14 +37,17 @@ router.post(
 })
 router.post('/addWorkerReport', async (req, res) => {
     try {
-      const {id, workerid} = req.body
+        const {id, workerid} = req.body
+        const report = await reports.find({_id: id, responsibleWorker: workerid})
+        if(report == ''){
 
-      await reports.update({_id: id}, {$push: {responsibleWorker: workerid}})
+            await reports.update({_id: id}, {$push: {responsibleWorker: workerid}})
 
-      res.status(201).json({message: 'Сотрудник добавлен'})
-      
+            res.status(201).json({message: 'Сотрудник добавлен'})
+        } else {res.status(202).json({ message: 'Пользователь уже существует'})}
+
     } catch (e) {
-      res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+        res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
     }
   })
 
