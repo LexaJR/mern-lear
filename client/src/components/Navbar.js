@@ -1,22 +1,22 @@
-import React, { useContext } from "react";
-import { NavLink, useHistory } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
-import "materialize-css";
+import React, { useContext } from "react"
+import { NavLink, useHistory } from "react-router-dom"
+import { AuthContext } from "../context/AuthContext"
+import "materialize-css"
 
 export const Navbar = () => {
-  const history = useHistory();
-  const auth = useContext(AuthContext);
+  const history = useHistory()
+  const auth = useContext(AuthContext)
 
   const logoutHandler = (event) => {
-    event.preventDefault();
-    auth.logout();
-    history.push("/");
-  };
+    event.preventDefault()
+    auth.logout()
+    history.push("/")
+  }
   document.addEventListener("DOMContentLoaded", function () {
-    var options;
-    var elems = document.querySelectorAll(".dropdown-trigger");
-    var instances = window.M.Dropdown.init(elems, options);
-  });
+    var options
+    var elems = document.querySelectorAll(".dropdown-trigger")
+    var instances = window.M.Dropdown.init(elems, options)
+  })
   return (
     <nav>
       <div className="nav-wrapper blue darken-1 padding2rem">
@@ -55,5 +55,5 @@ export const Navbar = () => {
         </ul>
       </div>
     </nav>
-  );
-};
+  )
+}

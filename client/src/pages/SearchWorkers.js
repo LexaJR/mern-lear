@@ -1,123 +1,136 @@
-import React, {useEffect, useState, useCallback} from 'react'
-import {useHttp} from '../hooks/http.hook'
+import React, { useEffect, useState, useCallback } from "react"
+import { useHttp } from "../hooks/http.hook"
 
 export const SearchWorkers = () => {
   const [workers, setWorkers] = useState([])
   const [reports, setReports] = useState([])
   const [placeWorks, setPlaceWorks] = useState([])
-  const {request} = useHttp()
+  const { request } = useHttp()
 
   const [form, setForm] = useState({
-    workerid: '', placeWork: ''
-})
+    workerid: "",
+    placeWork: "",
+  })
 
-const changeHandler = event => {
-  // console.log(event.target.name, + " " + event.target.value)
-  setForm({...form, [event.target.name]: event.target.value })
-}
+  const changeHandler = (event) => {
+    // console.log(event.target.name, + " " + event.target.value)
+    setForm({ ...form, [event.target.name]: event.target.value })
+  }
 
-const changeHandlerMed = async (event) => {
-  // console.log(event.target.name, + " " + event.target.value)
-  setForm({[event.target.name]: event.target.value })
-}
+  const changeHandlerMed = async (event) => {
+    // console.log(event.target.name, + " " + event.target.value)
+    setForm({ [event.target.name]: event.target.value })
+  }
 
-const searchWorkerByMed = async () => {
-  try {
+  const searchWorkerByMed = async () => {
+    try {
       // console.log({...form})
-      const data = await request('/api/search/workersByMed', 'POST', {...form})
+      const data = await request("/api/search/workersByMed", "POST", {
+        ...form,
+      })
       setWorkers(data)
-  } catch (error) {}
-}
+    } catch (error) {}
+  }
 
-const renderHandler = async () => {
-  try {
+  const renderHandler = async () => {
+    try {
       // console.log({...form})
-      const data = await request('/api/search/reportsWorkers', 'POST', {...form})
+      const data = await request("/api/search/reportsWorkers", "POST", {
+        ...form,
+      })
       setReports(data)
-  } catch (error) {}
-}
+    } catch (error) {}
+  }
 
-// const searchWorkers = useCallback(async () => {
-//   try {
-//       const data = await request('/api/search', 'POST', null)
-//       setWorkers(data)
-//   } catch (error) {console.log("Chto-to poshlo ne tak")}
-// }, [request])
+  // const searchWorkers = useCallback(async () => {
+  //   try {
+  //       const data = await request('/api/search', 'POST', null)
+  //       setWorkers(data)
+  //   } catch (error) {console.log("Chto-to poshlo ne tak")}
+  // }, [request])
 
-const searchPlaceWorks = useCallback(async () => {
-  try {
-      const data = await request('/api/search/med', 'POST', null)
+  const searchPlaceWorks = useCallback(async () => {
+    try {
+      const data = await request("/api/search/med", "POST", null)
       setPlaceWorks(data)
-  } catch (error) {console.log("Chto-to poshlo ne tak")}
-}, [request])
+    } catch (error) {
+      console.log("Chto-to poshlo ne tak")
+    }
+  }, [request])
 
-useEffect(() => {
-  searchPlaceWorks()
-}, [searchPlaceWorks])
+  useEffect(() => {
+    searchPlaceWorks()
+  }, [searchPlaceWorks])
 
   return (
     <div>
       <label htmlFor="placeWork">Выбор больницы</label>
-      <select 
-      class="browser-default"
-      id="placeWork"
-      name="placeWork" 
-      onChange={changeHandlerMed}>
-      <option value="" disabled selected>Choose your option</option>
-      { placeWorks.map((placeWork) => {
+      <select
+        class="browser-default"
+        id="placeWork"
+        name="placeWork"
+        onChange={changeHandlerMed}
+      >
+        <option value="" disabled selected>
+          Choose your option
+        </option>
+        {placeWorks.map((placeWork) => {
           return (
-          <option value={placeWork._id}>{placeWork.namePlaceWork}</option>
+            <option value={placeWork._id}>{placeWork.namePlaceWork}</option>
           )
-      })
-      }
+        })}
       </select>
-      <button 
+      <button
         className="btn waves-effect waves-ligh yellow darken-2 marginRight10"
         onClick={searchWorkerByMed}
         // disabled={loading}
-        >
-            Выборка
-        </button>
+      >
+        Выборка
+      </button>
       <label htmlFor="placeWork">Выбор сотрудника</label>
-      <select 
-      class="browser-default"
-      id="responsibleWorker"
-      name="workerid" 
-      onChange={changeHandler}>
-      <option value="" disabled selected>Choose your option</option>
-      { workers.map((worker) => {
+      <select
+        class="browser-default"
+        id="responsibleWorker"
+        name="workerid"
+        onChange={changeHandler}
+      >
+        <option value="" disabled selected>
+          Choose your option
+        </option>
+        {workers.map((worker) => {
           return (
-          <option value={worker._id}>{worker.name}    {worker.surname}    {worker.patronymic}</option>
+            <option value={worker._id}>
+              {worker.name} {worker.surname} {worker.patronymic}
+            </option>
           )
-      })
-      }
+        })}
       </select>
-      <button 
+      <button
         className="btn waves-effect waves-ligh yellow darken-2 marginRight10"
         onClick={renderHandler}
         // disabled={loading}
-        >
-            Поиск
-        </button>
+      >
+        Поиск
+      </button>
       <table>
-      <thead>
-      <tr>
-        <th>№</th>
-        <th>Наименование отчета</th>
-      </tr>
-      </thead>
-
-      <tbody>
-      { reports.map((report, index) => {
-        return (
-          <tr key={workers._id}>
-            <td>{index + 1}</td>
-            <td>{report.nameReport}</td>
+        <thead>
+          <tr>
+            <th>№</th>
+            <th>Наименование отчета</th>
           </tr>
-        )
-      }) }
-      </tbody>
-    </table>
+        </thead>
+
+        <tbody>
+          {reports.map((report, index) => {
+            return (
+              <tr key={workers._id}>
+                <td>{index + 1}</td>
+                <td>{report.nameReport}</td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
     </div>
   )
 }

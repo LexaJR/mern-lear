@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { useMessage } from "../hooks/message.hook";
+import React, { useState, useEffect, useCallback } from "react"
+import { useMessage } from "../hooks/message.hook"
 //import {useHistory} from 'react-router-dom'
-import { useHttp } from "../hooks/http.hook";
+import { useHttp } from "../hooks/http.hook"
 
 export const WorkerCard = ({ worker }) => {
-  const [placeWorks, setPlaceWorks] = useState([]);
-  const [posts, setPosts] = useState([]);
-  const { request } = useHttp();
-  const message = useMessage();
+  const [placeWorks, setPlaceWorks] = useState([])
+  const [posts, setPosts] = useState([])
+  const { request } = useHttp()
+  const message = useMessage()
   //const history = useHistory()
   const [form, setForm] = useState({
     _id: worker._id,
@@ -18,7 +18,7 @@ export const WorkerCard = ({ worker }) => {
     email: worker.email,
     placeWork: worker.placeWork,
     namePost: worker.post,
-  });
+  })
 
   // const [name, setName] = useState(worker.name);
   // const [surname, setSurname] = useState(worker.surname);
@@ -28,41 +28,41 @@ export const WorkerCard = ({ worker }) => {
 
   const searchPlaceWorksHandler = useCallback(async () => {
     try {
-      const data = await request("/api/search/med", "POST", null);
-      setPlaceWorks(data);
+      const data = await request("/api/search/med", "POST", null)
+      setPlaceWorks(data)
     } catch (error) {
-      console.log("Chto-to poshlo ne tak");
+      console.log("Chto-to poshlo ne tak")
     }
-  }, [request]);
+  }, [request])
 
   const searchPostsHandler = useCallback(async () => {
     try {
-      const post = await request("/api/search/posts", "POST", null);
-      setPosts(post);
+      const post = await request("/api/search/posts", "POST", null)
+      setPosts(post)
     } catch (error) {
-      console.log("Chto-to poshlo ne tak");
+      console.log("Chto-to poshlo ne tak")
     }
-  }, [request]);
+  }, [request])
 
   const updateHandler = async () => {
-    console.log(form);
-    const data = await request("/api/update/worker", "POST", { ...form });
-    message(data.message);
+    console.log(form)
+    const data = await request("/api/update/worker", "POST", { ...form })
+    message(data.message)
     //history.push('/listworker')
-  };
+  }
 
   useEffect(() => {
-    window.M.updateTextFields();
-    searchPlaceWorksHandler();
-    searchPostsHandler();
-  }, [searchPlaceWorksHandler, searchPostsHandler, setForm]);
+    window.M.updateTextFields()
+    searchPlaceWorksHandler()
+    searchPostsHandler()
+  }, [searchPlaceWorksHandler, searchPostsHandler, setForm])
 
   const changeHandler = (event) => {
-    console.log(event.target.name, +" " + event.target.value);
-    console.log(form);
-    setForm({ ...form, [event.target.name]: event.target.value });
+    console.log(event.target.name, +" " + event.target.value)
+    console.log(form)
+    setForm({ ...form, [event.target.name]: event.target.value })
     //setForm({form, _id: worker._id })
-  };
+  }
 
   return (
     <div className="card blue darken-2">
@@ -142,7 +142,7 @@ export const WorkerCard = ({ worker }) => {
             {placeWorks.map((placeWork) => {
               return (
                 <option value={placeWork._id}>{placeWork.namePlaceWork}</option>
-              );
+              )
             })}
           </select>
           <label htmlFor="namePost">Должность</label>
@@ -156,7 +156,7 @@ export const WorkerCard = ({ worker }) => {
               Текущая должность
             </option>
             {posts.map((post) => {
-              return <option value={post._id}>{post.namePost}</option>;
+              return <option value={post._id}>{post.namePost}</option>
             })}
           </select>
           <div className="card-action">
@@ -171,5 +171,5 @@ export const WorkerCard = ({ worker }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
