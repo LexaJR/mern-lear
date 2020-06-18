@@ -8,8 +8,12 @@ const schema = new Schema({
     localityPlaceWork: [{ type: Types.ObjectId, ref: 'directoryLocality' }],
     streetPlaceWork: {type: String},
     houseNumberPlaceWork: {type: String},
+    email: {type: String},
     phoneNumberResponsibleWorker: {type: String},
-    idFIAS: {type: String}
+    codePaternts: {type: Types.ObjectId, ref: 'directoryPlaceWork' },
+    OID: {type: String},
+    dataCreate: {type: Date},
+    dataClose: {type: Date}
 })
 
 module.exports = model('directoryPlaceWork', schema)

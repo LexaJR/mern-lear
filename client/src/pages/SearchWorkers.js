@@ -18,8 +18,7 @@ const changeHandler = event => {
 
 const changeHandlerMed = async (event) => {
   // console.log(event.target.name, + " " + event.target.value)
-  setForm({...form, [event.target.name]: event.target.value })
-  searchWorkerByMed()
+  setForm({[event.target.name]: event.target.value })
 }
 
 const searchWorkerByMed = async () => {
@@ -38,12 +37,12 @@ const renderHandler = async () => {
   } catch (error) {}
 }
 
-const searchWorkers = useCallback(async () => {
-  try {
-      const data = await request('/api/search', 'POST', null)
-      setWorkers(data)
-  } catch (error) {console.log("Chto-to poshlo ne tak")}
-}, [request])
+// const searchWorkers = useCallback(async () => {
+//   try {
+//       const data = await request('/api/search', 'POST', null)
+//       setWorkers(data)
+//   } catch (error) {console.log("Chto-to poshlo ne tak")}
+// }, [request])
 
 const searchPlaceWorks = useCallback(async () => {
   try {
@@ -54,14 +53,14 @@ const searchPlaceWorks = useCallback(async () => {
 
 useEffect(() => {
   searchPlaceWorks()
-}, [])
+}, [searchPlaceWorks])
 
   return (
     <div>
       <label htmlFor="placeWork">Выбор больницы</label>
       <select 
       class="browser-default"
-      id="responsibleWorker"
+      id="placeWork"
       name="placeWork" 
       onChange={changeHandlerMed}>
       <option value="" disabled selected>Choose your option</option>
@@ -72,6 +71,13 @@ useEffect(() => {
       })
       }
       </select>
+      <button 
+        className="btn waves-effect waves-ligh yellow darken-2 marginRight10"
+        onClick={searchWorkerByMed}
+        // disabled={loading}
+        >
+            Выборка
+        </button>
       <label htmlFor="placeWork">Выбор сотрудника</label>
       <select 
       class="browser-default"
