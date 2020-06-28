@@ -20,5 +20,15 @@ router.post("/unsetWorker", async (req, res) => {
     res.status(500).json({ message: "Что-то пошло не так, попробуйте снова" })
   }
 })
+router.post("/report", async (req, res) => {
+  try {
+    const { id } = req.body
+    console.log(id)
+    const report = await reports.remove({ _id: id })
+    res.status(200).json({ message: "Отчет удален" })
+  } catch (e) {
+    res.status(500).json({ message: "Что-то пошло не так, попробуйте снова" })
+  }
+})
 
 module.exports = router

@@ -67,5 +67,64 @@ router.post("/addWorkerReport", async (req, res) => {
     res.status(500).json({ message: "Что-то пошло не так, попробуйте снова" })
   }
 })
+router.post(
+  "/report",
+  async (req, res) => {
+    try {
+      const {
+        _id,
+        nameReport,
+        typeReport,
+        codePaternts,
+        baseType,
+        baseName,
+        baseDate,
+        baseNumber,
+        baseOrganization,
+        baseAuthor,
+        direction,
+        caterogies,
+        pereodicity,
+        formResult,
+        deadline,
+        responsibleWorker,
+        primaryInformation,
+        dataCreate,
+        dataClose
+      } = req.body
+
+      const doc = await reports.findOne({ _id })
+
+      const update = {
+        nameReport,
+        typeReport,
+        codePaternts,
+        base: {
+          type: baseType,
+          name: baseName,
+          date: baseDate,
+          number: baseNumber,
+          organization: baseOrganization,
+          author: baseAuthor,
+        },
+        direction,
+        caterogies,
+        pereodicity,
+        formResult,
+        deadline,
+        responsibleWorker,
+        primaryInformation,
+        dataCreate,
+        dataClose
+      }
+      await doc.updateOne(update)
+
+      res.status(201).json({ message: "Отчет отредактирован" })
+    } catch (error) {
+      res.status(500).json({ message: "Что-то пошло не так" })
+    }
+  }
+)
 
 module.exports = router
+

@@ -30,6 +30,14 @@ router.get("/:id", async (req, res) => {
     res.status(500).json({ message: "Что-то пошло не так, попробуйте снова" })
   }
 })
+router.get("/report/:id", async (req, res) => {
+  try {
+    const data = await reports.findById(req.params.id)
+    res.json(data)
+  } catch (e) {
+    res.status(500).json({ message: "Что-то пошло не так, попробуйте снова" })
+  }
+})
 router.post("/med", async (req, res) => {
   try {
     const data = await directoryPlaceWork.find()

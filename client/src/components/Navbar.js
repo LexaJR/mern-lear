@@ -29,10 +29,10 @@ export const Navbar = () => {
           </a>
           <ul id="dropdown1" class="dropdown-content">
             <li>
-              <NavLink to="/create">Создать сотрудника</NavLink>
+              <NavLink to="/createreport">Создать отчет</NavLink>
             </li>
             <li>
-              <NavLink to="/createreport">Создать отчет</NavLink>
+              <NavLink to="/create">Создать сотрудника</NavLink>
             </li>
             <li>
               <NavLink to="/createplacework">Создать место работы</NavLink>

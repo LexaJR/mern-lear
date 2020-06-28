@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react"
 import { useHttp } from "../hooks/http.hook"
+import { Link } from "react-router-dom"
 import { useMessage } from "../hooks/message.hook"
 
 export const UpdateReport = () => {
@@ -65,6 +66,14 @@ export const UpdateReport = () => {
       RenderTable()
     } catch (error) {}
   }
+  const unsetReport = async (event) => {
+    try {
+      console.log(form.id)
+      const data = await request("/api/delete/report", "POST", { ...form })
+      message(data.message)
+      searchReports()
+    } catch (error) {}
+  }
 
   const changeHandler = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value })
@@ -98,6 +107,20 @@ export const UpdateReport = () => {
       >
         Таблица
       </button>
+      <button
+        className="btn waves-effect waves-ligh yellow darken-2 marginRight10"
+        onClick={unsetReport}
+        // disabled={loading}
+      >
+        Удалить отчет
+      </button>
+      <button
+        className="btn waves-effect waves-ligh yellow darken-2 marginRight10"
+        // disabled={loading}
+      >
+        <Link to={`/updatereportpage/${form.id}`}>Редактировать</Link>
+      </button>
+      <br></br>
       <label htmlFor="placeWork">Выбор сотрудника</label>
       <select
         class="browser-default"
