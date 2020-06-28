@@ -34,6 +34,9 @@ export const Navbar = () => {
             <li>
               <NavLink to="/createreport">Создать отчет</NavLink>
             </li>
+            <li>
+              <NavLink to="/createplacework">Создать место работы</NavLink>
+            </li>
           </ul>
           <li>
             <NavLink to="/searchworker">Поиск по сотруднику</NavLink>
@@ -45,7 +48,7 @@ export const Navbar = () => {
             <NavLink to="/listworker">Список сотрудников</NavLink>
           </li>
           <li>
-            <NavLink to="/updateReport">Редактирование отчета</NavLink>
+            <NavLink to="/updatereport">Редактирование отчета</NavLink>
           </li>
           <li>
             <a href="/" onClick={logoutHandler}>

@@ -10,6 +10,7 @@ import {SearchReports} from './pages/SearchReports'
 import {SearchWorkers} from './pages/SearchWorkers'
 import {ListWorkerPage} from './pages/ListWorkerPage'
 import {UpdateReport} from './pages/UpdateReport'
+import {CreatePlaceWork} from './pages/CreatePlaceWork'
 
 
 export const useRoutes = isAuthenticated => {
@@ -40,8 +41,11 @@ export const useRoutes = isAuthenticated => {
         <Route path="/listworker">
           <ListWorkerPage />
         </Route>
-        <Route path="/updateReport">
+        <Route path="/updatereport">
           <UpdateReport />
+        </Route>
+        <Route path="/createplacework">
+          <CreatePlaceWork />
         </Route>
         
         <Redirect to="/default" />

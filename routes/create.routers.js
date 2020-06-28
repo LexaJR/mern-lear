@@ -2,10 +2,36 @@ const { Router } = require("express")
 const Worker = require("../models/workers")
 const directoryPlaceWork = require("../models/directoryPlaceWork")
 const directoryPosts = require("../models/directoryPost")
+const directoryTypeReport = require("../models/directoryTypeReport")
+const directoryTypeBase = require("../models/directoryTypeBase")
+const directionsOfReports = require("../models/directionsOfReports")
+const categoriesReport = require("../models/categoriesReport")
+const directoryPeriodicity = require("../models/directoryPeriodicity")
+const directoryPrimaryInformation = require("../models/directoryPrimaryInformation")
 const reports = require("../models/reports")
 const { check, validationResult } = require("express-validator")
 const router = Router()
 
+
+router.post("/all", [], async (req, res) => {
+  try {
+    const typereport = new directoryTypeReport({ nameTypeReport: "Второй тип отчета"})
+    await typereport.save()
+    const basetype = new directoryTypeBase({ nameTypeBase: "Второй тип основания"})
+    await basetype.save()
+    const direc = new directionsOfReports({ nameDirections: "Второе направление отчета"})
+    await direc.save()
+    const categ = new categoriesReport({ nameCategories: "Вторая категория отчета"})
+    await categ.save()
+    const period = new directoryPeriodicity({ namePeriodicity: "Вторая переодичность"})
+    await period.save()
+    const info = new directoryPrimaryInformation({ namePrimaryInformation: "Вторая первичная информация"})
+    await info.save()
+    res.status(201).json({ message: "report создан" })
+  } catch (error) {
+    res.status(500).json({ message: "Что-то пошло не так" })
+  }
+})
 router.post(
   "/worker",
   [check("email", "Некоректный email").isEmail()],
@@ -66,9 +92,12 @@ router.post("/post", [], async (req, res) => {
 })
 router.post("/report", [], async (req, res) => {
   try {
-    const { nameReport, responsibleWorker } = req.body
-    const placeWork = new reports({ nameReport, responsibleWorker })
-    await placeWork.save()
+    const { nameReport,typeReport,codePaternts,baseType,baseName,baseDate,baseNumber,baseOrganization,baseAuthor,
+    direction,caterogies,pereodicity,formResult,deadline,responsibleWorker,primaryInformation,dataCreate,dataClose} = req.body
+    console.log(nameReport,typeReport,codePaternts,baseType,baseName,baseDate,baseNumber,baseOrganization,baseAuthor,
+      direction,caterogies,pereodicity,formResult,deadline,responsibleWorker,primaryInformation,dataCreate,dataClose)
+    const report = new reports({ nameReport, typeReport, codePaternts, base: {type: baseType, name: baseName, date: baseDate, number: baseNumber, organization: baseOrganization, author: baseAuthor}, direction, caterogies, pereodicity, formResult, deadline, responsibleWorker, primaryInformation, dataCreate, dataClose})
+    await report.save()
     res.status(201).json({ message: "report создан" })
   } catch (error) {
     res.status(500).json({ message: "Что-то пошло не так" })

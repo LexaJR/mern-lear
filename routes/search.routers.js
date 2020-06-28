@@ -3,6 +3,12 @@ const config = require("config")
 const worker = require("../models/workers")
 const directoryPlaceWork = require("../models/directoryPlaceWork")
 const directoryPosts = require("../models/directoryPost")
+const directoryTypeReport = require("../models/directoryTypeReport")
+const directoryTypeBase = require("../models/directoryTypeBase")
+const directionsOfReports = require("../models/directionsOfReports")
+const categoriesReport = require("../models/categoriesReport")
+const directoryPeriodicity = require("../models/directoryPeriodicity")
+const directoryPrimaryInformation = require("../models/directoryPrimaryInformation")
 const reports = require("../models/reports")
 const auth = require("../middleware/auth.middleware")
 const router = Router()
@@ -94,5 +100,64 @@ router.post("/workersByMed", async (req, res) => {
     res.status(500).json({ message: "Что-то пошло не так, попробуйте снова" })
   }
 })
+router.post("/typeReport", async (req, res) => {
+  try {
+    const data = await directoryTypeReport.find()
+    res.json(data)
+  } catch (e) {
+    res.status(500).json({ message: "Что-то пошло не так, попробуйте снова" })
+  }
+})
+router.post("/reports", async (req, res) => {
+  try {
+    const data = await reports.find()
+    res.json(data)
+  } catch (e) {
+    res.status(500).json({ message: "Что-то пошло не так, попробуйте снова" })
+  }
+})
+router.post("/baseType", async (req, res) => {
+  try {
+    const data = await directoryTypeBase.find()
+    res.json(data)
+  } catch (e) {
+    res.status(500).json({ message: "Что-то пошло не так, попробуйте снова" })
+  }
+})
+router.post("/direction", async (req, res) => {
+  try {
+    const data = await directionsOfReports.find()
+    res.json(data)
+  } catch (e) {
+    res.status(500).json({ message: "Что-то пошло не так, попробуйте снова" })
+  }
+})
+router.post("/categories", async (req, res) => {
+  try {
+    const data = await categoriesReport.find()
+    res.json(data)
+  } catch (e) {
+    res.status(500).json({ message: "Что-то пошло не так, попробуйте снова" })
+  }
+})
+router.post("/pereodicitys", async (req, res) => {
+  try {
+    const data = await directoryPeriodicity.find()
+    res.json(data)
+  } catch (e) {
+    res.status(500).json({ message: "Что-то пошло не так, попробуйте снова" })
+  }
+})
+router.post("/primaryInformations", async (req, res) => {
+  try {
+    const data = await directoryPrimaryInformation.find()
+    res.json(data)
+  } catch (e) {
+    res.status(500).json({ message: "Что-то пошло не так, попробуйте снова" })
+  }
+})
 
 module.exports = router
+
+
+

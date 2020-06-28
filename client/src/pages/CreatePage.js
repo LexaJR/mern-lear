@@ -56,6 +56,7 @@ export const CreatePage = () => {
     searchPlaceWorksHandler()
     searchPostsHandler()
   }, [searchPlaceWorksHandler, searchPostsHandler])
+  
   return (
     <div className="card blue darken-2">
       <div className="card-content white-text">

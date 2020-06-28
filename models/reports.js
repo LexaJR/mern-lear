@@ -14,13 +14,13 @@ const schema = new Schema({
     },
     direction: {type: Types.ObjectId, ref: 'directionsOfReport'},
     caterogies: {type: Types.ObjectId, ref: 'catogoriesReport'},
-    Pereodicity: {type: Types.ObjectId, ref: 'directoryPereodicity'},
+    pereodicity: {type: Types.ObjectId, ref: 'directoryPereodicity'},
     formResult: {type: String},
-    Deadline: {type: Date},
+    deadline: {type: String},
     responsibleWorker: [{ type: Types.ObjectId, ref: 'workers' }],
     primaryInformation: {type: Types.ObjectId, ref: 'directoryPrimaryInformation'},
-    dataCreate: {type: Date},
-    dataClose: {type: Date}
+    dateCreate: {type: Date},
+    dateClose: {type: Date}
 })
 
 module.exports = model('reports', schema)
