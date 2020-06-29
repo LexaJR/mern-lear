@@ -12,6 +12,7 @@ import {ListWorkerPage} from './pages/ListWorkerPage'
 import {UpdateReport} from './pages/UpdateReport'
 import {CreatePlaceWork} from './pages/CreatePlaceWork'
 import {UpdateReportPage} from './pages/UpdateReportPage'
+import {DirectoryPage} from './pages/DirectoryPage'
 
 
 export const useRoutes = isAuthenticated => {
@@ -26,6 +27,9 @@ export const useRoutes = isAuthenticated => {
         </Route>
         <Route path="/createreport" exact>
           <CreateReport />
+        </Route>
+        <Route path="/directory" exact>
+          <DirectoryPage />
         </Route>
         <Route path="/detail/:id">
           <DetailPage />

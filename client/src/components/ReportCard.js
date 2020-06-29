@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react"
 import { useMessage } from "../hooks/message.hook"
 //import {useHistory} from 'react-router-dom'
 import { useHttp } from "../hooks/http.hook"
-import { Loader } from "../components/Loader"
+
 
 export const ReportCard = ({ report }) => {
   const [workers, setWorkers] = useState([])
@@ -45,17 +45,101 @@ export const ReportCard = ({ report }) => {
     //history.push('/listworker')
   }
 
-  useEffect(() => {
-    window.M.updateTextFields()
-
-  }, [setForm])
+  const searchWorkers = useCallback(async () => {
+    try {
+      const data = await request("/api/search", "POST", null)
+      setWorkers(data)
+    } catch (error) {
+      console.log("Chto-to poshlo ne tak")
+    }
+  }, [request])
+  const searchTypeReport = useCallback(async () => {
+    try {
+      const data = await request("/api/search/typeReport", "POST", null)
+      setTypesReports(data)
+    } catch (error) {
+      console.log("Chto-to poshlo ne tak")
+    }
+  }, [request])
+  const searchReport = useCallback(async () => {
+    try {
+      const data = await request("/api/search/reports", "POST", null)
+      setReports(data)
+    } catch (error) {
+      console.log("Chto-to poshlo ne tak")
+    }
+  }, [request])
+  const searchBaseType = useCallback(async () => {
+    try {
+      const data = await request("/api/search/baseType", "POST", null)
+      setBaseTypes(data)
+    } catch (error) {
+      console.log("Chto-to poshlo ne tak")
+    }
+  }, [request])
+  const searchDirection = useCallback(async () => {
+    try {
+      const data = await request("/api/search/direction", "POST", null)
+      setDirections(data)
+    } catch (error) {
+      console.log("Chto-to poshlo ne tak")
+    }
+  }, [request])
+  const searchCategories = useCallback(async () => {
+    try {
+      const data = await request("/api/search/categories", "POST", null)
+      setCaterogies(data)
+    } catch (error) {
+      console.log("Chto-to poshlo ne tak")
+    }
+  }, [request])
+  const searchPereodicitys = useCallback(async () => {
+    try {
+      const data = await request("/api/search/pereodicitys", "POST", null)
+      setPereodicitys(data)
+    } catch (error) {
+      console.log("Chto-to poshlo ne tak")
+    }
+  }, [request])
+  const searchPrimaryInformations = useCallback(async () => {
+    try {
+      const data = await request("/api/search/primaryInformations", "POST", null)
+      setPrimaryInformation(data)
+    } catch (error) {
+      console.log("Chto-to poshlo ne tak")
+    }
+  }, [request])
 
   const changeHandler = (event) => {
-    console.log(event.target.name, +" " + event.target.value)
-    console.log(form)
     setForm({ ...form, [event.target.name]: event.target.value })
-    //setForm({form, _id: worker._id })
   }
+
+  useEffect(() => {
+    window.M.updateTextFields()
+    searchWorkers()
+    searchTypeReport()
+    searchReport()
+    searchBaseType()
+    searchDirection()
+    searchCategories()
+    searchPereodicitys()
+    searchPrimaryInformations()
+  }, [searchWorkers,
+      searchTypeReport, 
+      searchReport, 
+      searchBaseType, 
+      searchDirection,
+      searchCategories,
+      searchPereodicitys,
+      searchPrimaryInformations])
+
+    var elems = document.querySelectorAll('.datepicker')
+    var instances = window.M.Datepicker.init(elems, {
+      format: 'dd/mm/yyyy',
+      showClearBtn: true,
+      firstDay: 1,
+      isRTL: true
+    })
 
   return (
     <div className="card blue darken-2">

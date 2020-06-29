@@ -37,6 +37,9 @@ export const Navbar = () => {
             <li>
               <NavLink to="/createplacework">Создать место работы</NavLink>
             </li>
+            <li>
+              <NavLink to="/directory">Заполнить стправочники</NavLink>
+            </li>
           </ul>
           <li>
             <NavLink to="/searchworker">Поиск по сотруднику</NavLink>

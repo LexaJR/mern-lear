@@ -94,14 +94,53 @@ router.post("/report", [], async (req, res) => {
   try {
     const { nameReport,typeReport,codePaternts,baseType,baseName,baseDate,baseNumber,baseOrganization,baseAuthor,
     direction,caterogies,pereodicity,formResult,deadline,responsibleWorker,primaryInformation,dataCreate,dataClose} = req.body
-    console.log(nameReport,typeReport,codePaternts,baseType,baseName,baseDate,baseNumber,baseOrganization,baseAuthor,
-      direction,caterogies,pereodicity,formResult,deadline,responsibleWorker,primaryInformation,dataCreate,dataClose)
     const report = new reports({ nameReport, typeReport, codePaternts, base: {type: baseType, name: baseName, date: baseDate, number: baseNumber, organization: baseOrganization, author: baseAuthor}, direction, caterogies, pereodicity, formResult, deadline, responsibleWorker, primaryInformation, dataCreate, dataClose})
     await report.save()
-    res.status(201).json({ message: "report создан" })
+    res.status(201).json({ message: "Отчет создан" })
   } catch (error) {
     res.status(500).json({ message: "Что-то пошло не так" })
   }
 })
+router.post("/periodicity", [], async (req, res) => {
+  try {
+    const { namePeriodicity} = req.body
+    const Periodicity = new directoryPeriodicity({ namePeriodicity })
+    await Periodicity.save()
+    res.status(201).json({ message: "Переодчиность создана" })
+  } catch (error) {
+    res.status(500).json({ message: "Что-то пошло не так" })
+  }
+})
+router.post("/categoriesReport", [], async (req, res) => {
+  try {
+    const { nameCategories} = req.body
+    const categor = new categoriesReport({ nameCategories })
+    await categor.save()
+    res.status(201).json({ message: "Категория создана" })
+  } catch (error) {
+    res.status(500).json({ message: "Что-то пошло не так" })
+  }
+})
+router.post("/directions", [], async (req, res) => {
+  try {
+    const { nameDirections} = req.body
+    const categor = new directionsOfReports({ nameDirections })
+    await categor.save()
+    res.status(201).json({ message: "Направление создано" })
+  } catch (error) {
+    res.status(500).json({ message: "Что-то пошло не так" })
+  }
+})
+router.post("/primaryinformation", [], async (req, res) => {
+  try {
+    const { namePrimaryInformation} = req.body
+    const categor = new directoryPrimaryInformation({ namePrimaryInformation })
+    await categor.save()
+    res.status(201).json({ message: "Уровень сбора первичной информации создан" })
+  } catch (error) {
+    res.status(500).json({ message: "Что-то пошло не так" })
+  }
+})
+
 
 module.exports = router

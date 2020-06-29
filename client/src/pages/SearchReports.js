@@ -15,9 +15,7 @@ export const SearchReports = () => {
 
   const searchReports = useCallback(async () => {
     try {
-      const data = await request("/api/search/searchReports", "POST", {
-        ...form,
-      })
+      const data = await request("/api/search/searchReports", "POST", null)
       setReports(data)
     } catch (error) {
       console.log("Chto-to poshlo ne tak")
