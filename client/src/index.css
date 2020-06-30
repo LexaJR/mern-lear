@@ -20,3 +20,12 @@ input.yellow-input:focus {
 .padding2rem {
     padding: 0 2rem;
 }
+.datepicker-day-button {
+    color: black!important;
+}
+.marginup {
+    margin-top: 100px;
+}
+.marginbottom {
+    margin-bottom: 10px;
+}

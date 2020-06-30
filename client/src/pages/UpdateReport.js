@@ -6,6 +6,10 @@ import { useMessage } from "../hooks/message.hook"
 export const UpdateReport = () => {
   const { request } = useHttp()
   const [reports, setReports] = useState([])
+  const [report, setReport] = useState([])
+  const [directions, setDirections] = useState([])
+  const [caterogies, setCaterogies] = useState([])
+  const [typesReports, setTypesReports] = useState([])
   const [form, setForm] = useState({
     id: "",
     workerid: "",
@@ -25,6 +29,31 @@ export const UpdateReport = () => {
     } catch (error) {
       console.log("Chto-to poshlo ne tak")
     }
+  }, [request, form])
+
+  const searchTypeReport = useCallback(async () => {
+    try {
+      const data = await request("/api/search/typeReport", "POST", null)
+      setTypesReports(data)
+    } catch (error) {
+      console.log("Chto-to poshlo ne tak")
+    }
+  }, [request])
+  const searchDirection = useCallback(async () => {
+    try {
+      const data = await request("/api/search/direction", "POST", null)
+      setDirections(data)
+    } catch (error) {
+      console.log("Chto-to poshlo ne tak")
+    }
+  }, [request])
+  const searchCategories = useCallback(async () => {
+    try {
+      const data = await request("/api/search/categories", "POST", null)
+      setCaterogies(data)
+    } catch (error) {
+      console.log("Chto-to poshlo ne tak")
+    }
   }, [request])
 
   const RenderTable = async () => {
@@ -32,6 +61,7 @@ export const UpdateReport = () => {
       const ids = await request("/api/search/workersReportsById", "POST", {
         ...form,
       })
+      setReport(ids)
       const data = await request("/api/search/workersById", "POST", ids)
       setWorkers(data)
     } catch (error) {}
@@ -80,15 +110,24 @@ export const UpdateReport = () => {
   }
 
   useEffect(() => {
+    window.M.updateTextFields()
     searchReports()
     searchWorkers()
-  }, [searchReports, searchWorkers])
+    searchTypeReport()
+    searchDirection()
+    searchCategories()
+  }, [searchWorkers,
+      searchTypeReport,  
+      searchDirection,
+      searchCategories,
+      searchReports
+])
 
   return (
     <div>
       <label htmlFor="responsibleWorker">Выбор сотрудника</label>
       <select
-        class="browser-default"
+        class="browser-default marginbottom"
         id="id"
         name="id"
         onChange={changeHandler}
@@ -115,7 +154,7 @@ export const UpdateReport = () => {
         Удалить отчет
       </button>
       <button
-        className="btn waves-effect waves-ligh yellow darken-2 marginRight10"
+        className="btn waves-effect waves-ligh yellow darken-2 marginRight10 "
         // disabled={loading}
       >
         <Link to={`/updatereportpage/${form.id}`}>Редактировать</Link>
@@ -123,7 +162,7 @@ export const UpdateReport = () => {
       <br></br>
       <label htmlFor="placeWork">Выбор сотрудника</label>
       <select
-        class="browser-default"
+        class="browser-default marginbottom"
         id="WorkerList"
         name="workerid"
         onChange={changeHandler}
@@ -184,6 +223,43 @@ export const UpdateReport = () => {
             )
           })}
         </tbody>
+      </table>
+      <table class="marginup">
+        <span>Информация об отчете</span>
+        <tr>
+          <td><label>Наиименование отчета</label></td>
+        <td><label>{report.nameReport}</label></td>
+        </tr>
+        <tr>
+          <td><label>Тип отчета</label></td>
+          <td><label>{typesReports.map((type) => {
+            if (report.typeReport == type._id) {
+              return(
+                type.nameTypeReport
+              )
+            }
+            })}</label></td>
+        </tr>
+        <tr>
+          <td><label>Направление отчета</label></td>
+          <td><label>{directions.map((direction) => {
+            if (report.direction == direction._id) {
+              return(
+                direction.nameDirections
+              )
+            }
+            })}</label></td>
+        </tr>
+        <tr>
+          <td><label>Категория отчета</label></td>
+          <td><label>{caterogies.map((categori) => {
+            if (report.caterogies == categori._id) {
+              return(
+                categori.nameCategories
+              )
+            }
+            })}</label></td>
+        </tr>
       </table>
     </div>
   )

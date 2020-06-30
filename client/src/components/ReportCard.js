@@ -169,12 +169,21 @@ export const ReportCard = ({ report }) => {
             Choose your option
           </option>
           {typesReports.map((type) => {
-            return (
-              <option value={type._id}>
-                {type.nameTypeReport}
-              </option>
-            )
-          })}
+            if (!report.typeReport == type._id) {
+              return (
+                <option value={type._id}>
+                  {type.nameTypeReport}
+                </option>
+              )
+            } else {
+              return (
+                <option value={type._id} selected>
+                  {type.nameTypeReport}
+                </option>
+              )
+            }
+            }
+          )}
         </select>
         <label htmlFor="codePaternts">Код родительской записи</label>
         <select
@@ -186,13 +195,22 @@ export const ReportCard = ({ report }) => {
           <option value="" disabled selected>
             Choose your option
           </option>
-          {reports.map((report) => {
-            return (
-              <option value={report._id}>
-                {report.nameReport}
-              </option>
-            )
-          })}
+          {reports.map((reportif) => {
+            if (!report.codePaternts == reportif._id) {
+              return (
+                <option value={reportif._id}>
+                  {reportif.nameReport}
+                </option>
+              )
+            } else {
+              return (
+                <option value={reportif._id} selected>
+                  {reportif.nameReport}
+                </option>
+              )
+            }
+            }
+          )}
         </select>
           <div class="blue darken-4">
           <label htmlFor="baseType">Тип основания</label>
@@ -206,11 +224,19 @@ export const ReportCard = ({ report }) => {
             Choose your option
           </option>
           {baseTypes.map((baseType) => {
-            return (
-              <option value={baseType._id}>
-                {baseType.nameTypeBase}
-              </option>
-            )
+            if (!report.baseType == baseType._id) {
+              return (
+                <option value={baseType._id}>
+                  {baseType.nameTypeBase}
+                </option>
+              )
+            } else {
+              return (
+                <option value={baseType._id} selected>
+                  {baseType.nameTypeBase}
+                </option>
+              )
+            }
           })}
         </select>
         <div className="input-field">
@@ -275,11 +301,19 @@ export const ReportCard = ({ report }) => {
             Choose your option
           </option>
           {directions.map((direction) => {
-            return (
-              <option value={direction._id}>
-                {direction.nameDirections}
-              </option>
-            )
+            if (!report.direction == direction._id) {
+              return (
+                <option value={direction._id}>
+                  {direction.nameDirections}
+                </option>
+              )
+            } else {
+              return (
+                <option value={direction._id} selected>
+                  {direction.nameDirections}
+                </option>
+              )
+            }
           })}
         </select>
         <label htmlFor="caterogies">Категория</label>
@@ -293,11 +327,19 @@ export const ReportCard = ({ report }) => {
             Choose your option
           </option>
           {caterogies.map((categori) => {
-            return (
-              <option value={categori._id}>
-                {categori.nameCategories}
-              </option>
-            )
+            if (!report.caterogies == categori._id) {
+              return (
+                <option value={categori._id}>
+                  {categori.nameCategories}
+                </option>
+              )
+            } else {
+              return (
+                <option value={categori._id} selected>
+                  {categori.nameCategories}
+                </option>
+              )
+            }
           })}
         </select>
         <label htmlFor="pereodicity">Переодичность</label>
@@ -311,11 +353,19 @@ export const ReportCard = ({ report }) => {
             Choose your option
           </option>
           {pereodicitys.map((pereodicity) => {
-            return (
-              <option value={pereodicity._id}>
-                {pereodicity.namePeriodicity}
-              </option>
-            )
+             if (!report.pereodicity == pereodicity._id) {
+              return (
+                <option value={pereodicity._id}>
+                  {pereodicity.namePeriodicity}
+                </option>
+              )
+            } else {
+              return (
+                <option value={pereodicity._id} selected>
+                  {pereodicity.namePeriodicity}
+                </option>
+              )
+            }
           })}
         </select>
         <div className="input-field">
@@ -342,24 +392,6 @@ export const ReportCard = ({ report }) => {
           />
           <label htmlFor="nameReport">Срок исполнения</label>
         </div>
-        <label htmlFor="responsibleWorker">Ответсвтвенный сотрудник</label>
-        <select
-          class="browser-default"
-          id="responsibleWorker"
-          name="responsibleWorker"
-          onChange={changeHandler}
-        >
-          <option value="" disabled selected>
-            Choose your option
-          </option>
-          {workers.map((worker) => {
-            return (
-              <option value={worker._id}>
-                {worker.name} {worker.surname} {worker.patronymic}
-              </option>
-            )
-          })}
-        </select>
         <label htmlFor="primaryInformation">Уровень сбора первичной информации</label>
         <select
           class="browser-default"
@@ -371,11 +403,19 @@ export const ReportCard = ({ report }) => {
             Choose your option
           </option>
           {primaryInformations.map((primaryInformation) => {
-            return (
-              <option value={primaryInformation._id}>
-                {primaryInformation.namePrimaryInformation}
-              </option>
-            )
+            if (!report.primaryInformation == primaryInformation._id) {
+              return (
+                <option value={primaryInformation._id}>
+                  {primaryInformation.namePrimaryInformation}
+                </option>
+              )
+            } else {
+              return (
+                <option value={primaryInformation._id} selected>
+                  {primaryInformation.namePrimaryInformation}
+                </option>
+              )
+            }
           })}
         </select>
         <label htmlFor="responsibleWorker">Дата создания</label>
