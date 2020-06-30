@@ -113,6 +113,9 @@ export const ReportCard = ({ report }) => {
   const changeHandler = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value })
   }
+  const selectedHandler = (event) => {
+    setForm({ ...form, [event.target.name]: event.target.value })
+  }
 
   useEffect(() => {
     window.M.updateTextFields()
@@ -135,7 +138,7 @@ export const ReportCard = ({ report }) => {
 
     var elems = document.querySelectorAll('.datepicker')
     var instances = window.M.Datepicker.init(elems, {
-      format: 'dd/mm/yyyy',
+      format: 'yyyy-mm-dd',
       showClearBtn: true,
       firstDay: 1,
       isRTL: true
@@ -169,7 +172,7 @@ export const ReportCard = ({ report }) => {
             Choose your option
           </option>
           {typesReports.map((type) => {
-            if (!report.typeReport == type._id) {
+            if (!report.typeReport === type._id) {
               return (
                 <option value={type._id}>
                   {type.nameTypeReport}
@@ -196,7 +199,7 @@ export const ReportCard = ({ report }) => {
             Choose your option
           </option>
           {reports.map((reportif) => {
-            if (!report.codePaternts == reportif._id) {
+            if (!report.codePaternts === reportif._id) {
               return (
                 <option value={reportif._id}>
                   {reportif.nameReport}
@@ -224,7 +227,7 @@ export const ReportCard = ({ report }) => {
             Choose your option
           </option>
           {baseTypes.map((baseType) => {
-            if (!report.baseType == baseType._id) {
+            if (!report.baseType === baseType._id) {
               return (
                 <option value={baseType._id}>
                   {baseType.nameTypeBase}
@@ -252,7 +255,7 @@ export const ReportCard = ({ report }) => {
           <label htmlFor="nameReport">Наименование основания</label>
         </div>
         <label htmlFor="responsibleWorker">Дата основания</label>
-        <input type="text" class="datepicker" name="baseDate" id="baseDate"></input>
+        <input type="text" class="datepicker" name="baseDate" id="baseDate" value={form.baseDate}></input>
         <div className="input-field">
           <input
             placeholder="Введите номер основания"
@@ -301,7 +304,7 @@ export const ReportCard = ({ report }) => {
             Choose your option
           </option>
           {directions.map((direction) => {
-            if (!report.direction == direction._id) {
+            if (!report.direction === direction._id) {
               return (
                 <option value={direction._id}>
                   {direction.nameDirections}
@@ -327,7 +330,7 @@ export const ReportCard = ({ report }) => {
             Choose your option
           </option>
           {caterogies.map((categori) => {
-            if (!report.caterogies == categori._id) {
+            if (!report.caterogies === categori._id) {
               return (
                 <option value={categori._id}>
                   {categori.nameCategories}
@@ -353,7 +356,7 @@ export const ReportCard = ({ report }) => {
             Choose your option
           </option>
           {pereodicitys.map((pereodicity) => {
-             if (!report.pereodicity == pereodicity._id) {
+             if (!report.pereodicity === pereodicity._id) {
               return (
                 <option value={pereodicity._id}>
                   {pereodicity.namePeriodicity}
@@ -403,7 +406,7 @@ export const ReportCard = ({ report }) => {
             Choose your option
           </option>
           {primaryInformations.map((primaryInformation) => {
-            if (!report.primaryInformation == primaryInformation._id) {
+            if (!report.primaryInformation === primaryInformation._id) {
               return (
                 <option value={primaryInformation._id}>
                   {primaryInformation.namePrimaryInformation}
