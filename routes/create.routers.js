@@ -92,9 +92,53 @@ router.post("/post", [], async (req, res) => {
 })
 router.post("/report", [], async (req, res) => {
   try {
-    const { nameReport,typeReport,codePaternts,baseType,baseName,baseDate,baseNumber,baseOrganization,baseAuthor,
-    direction,caterogies,pereodicity,formResult,deadline,responsibleWorker,primaryInformation,dataCreate,dataClose} = req.body
-    const report = new reports({ nameReport, typeReport, codePaternts, base: {type: baseType, name: baseName, date: baseDate, number: baseNumber, organization: baseOrganization, author: baseAuthor}, direction, caterogies, pereodicity, formResult, deadline, responsibleWorker, primaryInformation, dataCreate, dataClose})
+    // const { nameReport,typeReport,codePaternts,baseType,baseName,baseDate,baseNumber,baseOrganization,baseAuthor,
+    // direction,caterogies,pereodicity,formResult,deadline,responsibleWorker,primaryInformation,dataCreate,dataClose} = req.body
+    // console.log(req.body)
+    // const report = new reports({ nameReport, typeReport, codePaternts, base: {type: baseType, name: baseName, date: baseDate, number: baseNumber, organization: baseOrganization, author: baseAuthor}, direction, caterogies, pereodicity, formResult, deadline, responsibleWorker, primaryInformation, dataCreate, dataClose})
+    const {
+      nameReport,
+      typeReport,
+      codePaternts,
+      baseType,
+      baseName,
+      baseDate,
+      baseNumber,
+      baseOrganization,
+      baseAuthor,
+      direction,
+      caterogies,
+      pereodicity,
+      formResult,
+      deadline,
+      responsibleWorker,
+      primaryInformation,
+      dataCreate,
+      dataClose
+    } = req.body
+
+    const report = new reports({
+      nameReport,
+      typeReport,
+      codePaternts,
+      base: {
+        type: baseType,
+        name: baseName,
+        date: baseDate,
+        number: baseNumber,
+        organization: baseOrganization,
+        author: baseAuthor,
+      },
+      direction,
+      caterogies,
+      pereodicity,
+      formResult,
+      deadline,
+      responsibleWorker,
+      primaryInformation,
+      dataCreate,
+      dataClose
+    })
     await report.save()
     res.status(201).json({ message: "Отчет создан" })
   } catch (error) {

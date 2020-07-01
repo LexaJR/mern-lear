@@ -141,7 +141,7 @@ export const ReportCard = ({ report }) => {
       format: 'yyyy-mm-dd',
       showClearBtn: true,
       firstDay: 1,
-      isRTL: true
+      isRTL: false
     })
 
   return (
@@ -255,7 +255,7 @@ export const ReportCard = ({ report }) => {
           <label htmlFor="nameReport">Наименование основания</label>
         </div>
         <label htmlFor="responsibleWorker">Дата основания</label>
-        <input type="text" class="datepicker" name="baseDate" id="baseDate" value={form.baseDate}></input>
+        <input type="text" class="datepicker" name="baseDate" id="baseDate" value={form.baseDate} onMouseMove={changeHandler}></input>
         <div className="input-field">
           <input
             placeholder="Введите номер основания"
@@ -422,9 +422,9 @@ export const ReportCard = ({ report }) => {
           })}
         </select>
         <label htmlFor="responsibleWorker">Дата создания</label>
-        <input type="text" class="datepicker" name="dateCreate"></input>
+        <input type="text" class="datepicker" name="dateCreate" value={form.dateCreate} onMouseMove={changeHandler}></input>
         <label htmlFor="responsibleWorker">Дата закрытия</label>
-        <input type="text" class="datepicker" name="dateClose"></input>
+        <input type="text" class="datepicker" name="dateClose" value={form.dateClose} onMouseMove={changeHandler}></input>
         <div className="card-action">
           <button
             className="btn waves-effect waves-ligh yellow darken-2 marginRight10"

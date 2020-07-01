@@ -2,12 +2,12 @@ const {Schema, model, Types} = require('mongoose')
 
 const schema = new Schema({
     nameReport: {type: String, required: true},
-    typeReport: { type: Types.ObjectId, ref: 'directoryTypeReport' },
-    codePaternts: {type: Types.ObjectId, ref: 'reports' },
+    typeReport: { type: Types.ObjectId, ref: 'directoryTypeReport'},
+    codePaternts: {type: Types.ObjectId, ref: 'reports', required: false},
     base: {
         type: {type: Types.ObjectId, ref: 'directoryTypeBase'},
         name: {type: String},
-        date: {type: Date},
+        date: {type: String},
         number: {type: String},
         organization: {type: String},
         author: {type: String}
@@ -17,10 +17,10 @@ const schema = new Schema({
     pereodicity: {type: Types.ObjectId, ref: 'directoryPereodicity'},
     formResult: {type: String},
     deadline: {type: String},
-    responsibleWorker: [{ type: Types.ObjectId, ref: 'workers' }],
+    responsibleWorker: [{ type: Types.ObjectId, ref: 'workers'}],
     primaryInformation: {type: Types.ObjectId, ref: 'directoryPrimaryInformation'},
-    dateCreate: {type: Date},
-    dateClose: {type: Date}
+    dateCreate: {type: String},
+    dateClose: {type: String}
 })
 
 module.exports = model('reports', schema)

@@ -92,6 +92,7 @@ router.post(
         dataCreate,
         dataClose
       } = req.body
+      console.log(req.body)
 
       const doc = await reports.findOne({ _id })
 
