@@ -72,7 +72,7 @@ export const SearchWorkers = () => {
         onChange={changeHandlerMed}
       >
         <option value="" disabled selected>
-          Choose your option
+          Выберите вариант из выпадающего списка
         </option>
         {placeWorks.map((placeWork) => {
           return (
@@ -95,7 +95,7 @@ export const SearchWorkers = () => {
         onChange={changeHandler}
       >
         <option value="" disabled selected>
-          Choose your option
+          Выберите вариант из выпадающего списка
         </option>
         {workers.map((worker) => {
           return (

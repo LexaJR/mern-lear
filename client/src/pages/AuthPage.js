@@ -39,7 +39,7 @@ export const AuthPage = () => {
             <div>
               <div className="input-field">
                 <input
-                  placeholder="Введите login"
+                  placeholder="Введите логин"
                   id="login"
                   type="text"
                   name="login"
@@ -47,7 +47,7 @@ export const AuthPage = () => {
                   value={form.email}
                   onChange={changeHandler}
                 />
-                <label htmlFor="login">Login</label>
+                <label htmlFor="login">Логин</label>
               </div>
               <div className="input-field">
                 <input

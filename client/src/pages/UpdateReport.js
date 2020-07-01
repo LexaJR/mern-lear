@@ -133,7 +133,7 @@ export const UpdateReport = () => {
         onChange={changeHandler}
       >
         <option value="" disabled selected>
-          Choose your option
+          Выберите вариант из выпадающего списка
         </option>
         {reports.map((report) => {
           return <option value={report._id}>{report.nameReport}</option>
@@ -168,7 +168,7 @@ export const UpdateReport = () => {
         onChange={changeHandler}
       >
         <option value="" disabled selected>
-          Choose your option
+          Выберите вариант из выпадающего списка
         </option>
         {workersList.map((worker) => {
           return (

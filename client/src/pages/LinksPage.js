@@ -45,7 +45,7 @@ export const LinksPage = () => {
         onMouseMove={searchWorkers}
       >
         <option value="" disabled selected>
-          Choose your option
+          Выберите вариант из выпадающего списка
         </option>
         {workers.map((worker) => {
           return (

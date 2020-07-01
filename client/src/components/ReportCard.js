@@ -169,7 +169,7 @@ export const ReportCard = ({ report }) => {
           onChange={changeHandler}
         >
           <option value="" disabled selected>
-            Choose your option
+            Выберите вариант из выпадающего списка
           </option>
           {typesReports.map((type) => {
             if (!report.typeReport === type._id) {
@@ -196,7 +196,7 @@ export const ReportCard = ({ report }) => {
           onChange={changeHandler}
         >
           <option value="" disabled selected>
-            Choose your option
+            Выберите вариант из выпадающего списка
           </option>
           {reports.map((reportif) => {
             if (!report.codePaternts === reportif._id) {
@@ -224,7 +224,7 @@ export const ReportCard = ({ report }) => {
           onChange={changeHandler}
         >
           <option value="" disabled selected>
-            Choose your option
+            Выберите вариант из выпадающего списка
           </option>
           {baseTypes.map((baseType) => {
             if (!report.baseType === baseType._id) {
@@ -301,7 +301,7 @@ export const ReportCard = ({ report }) => {
           onChange={changeHandler}
         >
           <option value="" disabled selected>
-            Choose your option
+            Выберите вариант из выпадающего списка
           </option>
           {directions.map((direction) => {
             if (!report.direction === direction._id) {
@@ -327,7 +327,7 @@ export const ReportCard = ({ report }) => {
           onChange={changeHandler}
         >
           <option value="" disabled selected>
-            Choose your option
+            Выберите вариант из выпадающего списка
           </option>
           {caterogies.map((categori) => {
             if (!report.caterogies === categori._id) {
@@ -353,7 +353,7 @@ export const ReportCard = ({ report }) => {
           onChange={changeHandler}
         >
           <option value="" disabled selected>
-            Choose your option
+            Выберите вариант из выпадающего списка
           </option>
           {pereodicitys.map((pereodicity) => {
              if (!report.pereodicity === pereodicity._id) {
@@ -403,7 +403,7 @@ export const ReportCard = ({ report }) => {
           onChange={changeHandler}
         >
           <option value="" disabled selected>
-            Choose your option
+            Выберите вариант из выпадающего списка
           </option>
           {primaryInformations.map((primaryInformation) => {
             if (!report.primaryInformation === primaryInformation._id) {

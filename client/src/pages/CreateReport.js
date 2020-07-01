@@ -168,7 +168,7 @@ export const CreateReport = () => {
             onChange={changeHandler}
           >
             <option value="" disabled selected>
-              Choose your option
+              Выберите вариант из выпадающего списка
             </option>
             {typesReports.map((type) => {
               return (
@@ -186,7 +186,7 @@ export const CreateReport = () => {
             onChange={changeHandler}
           >
             <option value="" disabled selected>
-              Choose your option
+              Выберите вариант из выпадающего списка
             </option>
             {reports.map((report) => {
               return (
@@ -205,7 +205,7 @@ export const CreateReport = () => {
             onChange={changeHandler}
           >
             <option value="" disabled selected>
-              Choose your option
+              Выберите вариант из выпадающего списка
             </option>
             {baseTypes.map((baseType) => {
               return (
@@ -274,7 +274,7 @@ export const CreateReport = () => {
             onChange={changeHandler}
           >
             <option value="" disabled selected>
-              Choose your option
+              Выберите вариант из выпадающего списка
             </option>
             {directions.map((direction) => {
               return (
@@ -292,7 +292,7 @@ export const CreateReport = () => {
             onChange={changeHandler}
           >
             <option value="" disabled selected>
-              Choose your option
+              Выберите вариант из выпадающего списка
             </option>
             {caterogies.map((categori) => {
               return (
@@ -310,7 +310,7 @@ export const CreateReport = () => {
             onChange={changeHandler}
           >
             <option value="" disabled selected>
-              Choose your option
+              Выберите вариант из выпадающего списка
             </option>
             {pereodicitys.map((pereodicity) => {
               return (
@@ -352,7 +352,7 @@ export const CreateReport = () => {
             onChange={changeHandler}
           >
             <option value="" disabled selected>
-              Choose your option
+              Выберите вариант из выпадающего списка
             </option>
             {workers.map((worker) => {
               return (
@@ -370,7 +370,7 @@ export const CreateReport = () => {
             onChange={changeHandler}
           >
             <option value="" disabled selected>
-              Choose your option
+              Выберите вариант из выпадающего списка
             </option>
             {primaryInformations.map((primaryInformation) => {
               return (

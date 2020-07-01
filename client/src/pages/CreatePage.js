@@ -130,7 +130,7 @@ export const CreatePage = () => {
             onChange={changeHandler}
           >
             <option value="" disabled selected>
-              Choose your option
+              Выберите вариант из выпадающего списка
             </option>
             {placeWorks.map((placeWork) => {
               return (
@@ -146,7 +146,7 @@ export const CreatePage = () => {
             onChange={changeHandler}
           >
             <option value="" disabled selected>
-              Choose your option
+              Выберите вариант из выпадающего списка
             </option>
             {posts.map((post) => {
               return <option value={post._id}>{post.namePost}</option>

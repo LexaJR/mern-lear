@@ -20,12 +20,6 @@ export const WorkerCard = ({ worker }) => {
     namePost: worker.post,
   })
 
-  // const [name, setName] = useState(worker.name);
-  // const [surname, setSurname] = useState(worker.surname);
-  // const [patronymic, setPatronymic] = useState(worker.patronymic);
-  // const [phoneNumber, setPhoneNumber] = useState(worker.phoneNumber);
-  // const [email, setEmail] = useState(worker.email);
-
   const searchPlaceWorksHandler = useCallback(async () => {
     try {
       const data = await request("/api/search/med", "POST", null)
@@ -45,7 +39,6 @@ export const WorkerCard = ({ worker }) => {
   }, [request])
 
   const updateHandler = async () => {
-    console.log(form)
     const data = await request("/api/update/worker", "POST", { ...form })
     message(data.message)
     //history.push('/listworker')
@@ -58,10 +51,7 @@ export const WorkerCard = ({ worker }) => {
   }, [searchPlaceWorksHandler, searchPostsHandler, setForm])
 
   const changeHandler = (event) => {
-    console.log(event.target.name, +" " + event.target.value)
-    console.log(form)
     setForm({ ...form, [event.target.name]: event.target.value })
-    //setForm({form, _id: worker._id })
   }
 
   return (
